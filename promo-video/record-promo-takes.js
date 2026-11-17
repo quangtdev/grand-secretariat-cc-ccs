@@ -22,7 +22,7 @@ const TEXT = {
     report: 'Xong việc<br>thì lên <b>báo cáo</b>',
     worlds: 'Chán triều đình?<br><b>Đổi thế giới</b>',
     worldNames: { 'hue-pixel': 'Huế pixel 2D', zoo: 'Sở thú', office: 'Văn phòng', 'space-station': 'Trạm vũ trụ' },
-    endTitle: 'Grand Secretariat', endLine: 'Xem mọi agent Claude Code<br>trong một triều đình', endCta: 'Mã nguồn mở · Link ở bio',
+    endTitle: 'Grand Secretariat', endLine: 'Xem mọi agent Claude Code<br>trong một triều đình', endCta: 'Mã nguồn mở · MIT', repo: 'github.com/quangtdev/<br>grand-secretariat-cc-ccs',
   },
   en: {
     hook: 'My AI agents work<br>in a <b>royal court</b>',
@@ -33,7 +33,7 @@ const TEXT = {
     report: 'Work done?<br>It comes to <b>report</b>',
     worlds: 'Bored of the court?<br><b>Switch worlds</b>',
     worldNames: { 'hue-pixel': 'Pixel 2D court', zoo: 'Zoo', office: 'Office', 'space-station': 'Space station' },
-    endTitle: 'Grand Secretariat', endLine: 'Watch every Claude Code agent<br>in one royal court', endCta: 'Open source · Link in bio',
+    endTitle: 'Grand Secretariat', endLine: 'Watch every Claude Code agent<br>in one royal court', endCta: 'Open source · MIT', repo: 'github.com/quangtdev/<br>grand-secretariat-cc-ccs',
   },
 }[lang];
 
@@ -54,7 +54,9 @@ const RECORDING_CSS = `
   #promo-end .cta { justify-self: center; margin-top: 18px; padding: 13px 26px; border-radius: 999px; background: #f4c542; color: #3d0d08; font-size: 23px; font-weight: 600; }
   #promo-end > * { transform: translateY(14px); opacity: 0; transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .6s ease; }
   #promo-end.on > * { transform: none; opacity: 1; }
+  #promo-end .repo { font-size: 22px; line-height: 1.35; font-weight: 600; white-space: nowrap; color: #f4c542; }
   #promo-end.on > :nth-child(2) { transition-delay: .25s; } #promo-end.on > :nth-child(3) { transition-delay: .5s; }
+  #promo-end.on > :nth-child(4) { transition-delay: .75s; }
 `;
 
 const caption = (page, html, where) => page.evaluate((h, w) => window.__promo.caption(h, w), html, where);
@@ -198,6 +200,9 @@ async function takeWorld(browser, world, index) {
 }
 
 async function takeEnd(browser) {
+  let saved = []; // the server saves its scribes here; empty after a fresh start
+  try { saved = JSON.parse(fs.readFileSync(path.join(L.ROOT, 'state', 'sessions.json'), 'utf8')); } catch { /* none yet */ }
+  if (!saved.length) for (const name of ['checkout-api', 'mobile-app', 'billing-service', 'design-system', 'data-pipeline']) await L.summon(name);
   const page = await L.openCourt(browser, 'hue-court');
   await stagePage(page);
   await L.sleep(5000);
@@ -205,7 +210,7 @@ async function takeEnd(browser) {
   await L.sleep(1000);
   await page.evaluate((t) => {
     const el = document.createElement('div'); el.id = 'promo-end';
-    el.innerHTML = `<h1>${t.endTitle}</h1><p>${t.endLine}</p><div class="cta">${t.endCta}</div>`;
+    el.innerHTML = `<h1>${t.endTitle}</h1><p>${t.endLine}</p><div class="cta">${t.endCta}</div><div class="repo">${t.repo}</div>`;
     document.body.appendChild(el);
   }, TEXT);
   const cap = await L.startCapture(page, path.join(OUT, 'take-C'));
