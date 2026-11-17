@@ -1,0 +1,1 @@
+- [Verify library behaviour via built bundle](reference_verify-library-behaviour-via-built-bundle.md) — node_modules is hook-blocked; build to scratchpad and rg the bundle

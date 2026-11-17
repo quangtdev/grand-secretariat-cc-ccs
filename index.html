@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Grand Secretariat</title>
+  <script>
+    // Marks the page with the chosen world before first paint, so the world's UI colours
+    // (styles/world-themes.css) never flash the Huế ones. Same choice as worlds/world-registry.js
+    // (?world= wins, then the remembered one; unknown ids mean the default): keep these ids in sync with WORLDS there.
+    (function () {
+      var ids = ['hue-court', 'hue-pixel', 'zoo', 'office', 'space-station'], id = new URLSearchParams(location.search).get('world');
+      if (ids.indexOf(id) < 0) { try { id = localStorage.getItem('grand-secretariat:world'); } catch (e) { id = null; } }
+      document.documentElement.dataset.world = ids.indexOf(id) < 0 ? 'hue-court' : id;
+    })();
+  </script>
+  <link rel="stylesheet" href="/src/styles/court-shell.css">
+  <link rel="stylesheet" href="/src/styles/court-dock.css">
+  <link rel="stylesheet" href="/src/styles/world-themes.css">
+</head>
+<body>
+  <div class="shell" id="shell">
+    <nav class="rail" aria-label="Court roster">
+      <div class="rail-head">
+        <h1 class="rail-title">Grand Secretariat</h1>
+        <button class="button button-icon rail-collapse" id="rail-collapse" type="button"></button>
+      </div>
+      <p class="rail-tally" id="tally" aria-live="polite"></p>
+      <div class="rail-actions">
+        <button class="button button-primary" id="summon-button" type="button"></button>
+        <button class="button button-quiet button-icon" id="history-button" type="button"></button>
+        <button class="button button-quiet button-icon" id="annals-button" type="button"></button>
+      </div>
+      <div class="roster" id="roster"></div>
+      <div class="rail-foot">
+        <div class="sound-controls" id="sound-controls" role="group" aria-label="Sound"></div>
+        <div class="sound-controls" id="saver-controls" role="group" aria-label="Power"></div>
+        <div class="sound-controls" id="world-controls" role="group" aria-label="World"></div>
+        <div class="app-controls" id="app-controls" role="group" aria-label="App update and restart" hidden></div>
+      </div>
+    </nav>
+
+    <main class="stage" id="stage">
+      <button class="button button-icon rail-expand" id="rail-expand" type="button" hidden></button>
+      <canvas id="court" aria-label="The court: every scribe is one agent session"></canvas>
+      <div class="chips" id="chips"></div>
+      <p class="stage-hint" id="stage-hint">Drag to move. Scroll or right-drag to move closer. Middle-drag to turn.</p>
+    </main>
+
+    <div class="dock-resizer" id="dock-resizer"></div>
+    <aside class="dock" id="dock" aria-label="Agent panel" hidden></aside>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

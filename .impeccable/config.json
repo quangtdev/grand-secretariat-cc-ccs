@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-13T15:14:51.050Z",
+        "reason": "agent decided: the toast dots and petition pulse are bound to live agent status from Claude Code hooks (shown only while an agent is working or waiting); the user asked for an activity indicator over working agents"
+      }
+    ]
+  }
+}

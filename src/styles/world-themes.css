@@ -1,0 +1,67 @@
+/*
+ * UI colours per world. index.html marks the page `<html data-world="<world id>">` before first
+ * paint; a world that wants its own shell colours adds ONE block below that overrides the
+ * tokens declared in court-shell.css (:root). Huế court and Huế pixel have no block: the base
+ * tokens are theirs.
+ *
+ * Rules
+ *  - Override existing tokens only (--lacquer*, --bone*, --ink*, --mist, --font-ui ...); do
+ *    not add new selectors or restyle components here.
+ *  - Status colour families are INVARIANT across worlds and must not be overridden:
+ *      --glaze / --glaze-bright / --glaze-ink   petition yellow (an agent asks)
+ *      --jade / --jade-ink                      report green (an agent is done)
+ *      --danger / --danger-text                 red (failed, destructive)
+ *    A user reads those colours as states before reading any word.
+ *  - Keep text/background contrast at least 4.5:1 (3:1 for --ink-edge borders).
+ *  - The :root[data-world] selector out-weighs plain :root, so file order does not matter.
+ *
+ * Template (replace <id> with the world's id from worlds/world-registry.js):
+ *
+ * :root[data-world="<id>"] {
+ *   --lacquer: oklch(0.43 0.1 150);
+ *   --lacquer-deep: oklch(0.35 0.09 150);
+ *   --lacquer-raise: oklch(0.5 0.11 150);
+ * }
+ */
+
+/* Zoo: a warm forest green-brown rail and ink. Hue 125 (olive) keeps the rail well away from the
+ * jade of a finished report (hue 165, much lighter), so a "done" icon on the rail still pops. */
+:root[data-world="zoo"] {
+  --lacquer: oklch(0.4 0.07 125);
+  --lacquer-deep: oklch(0.32 0.06 125);
+  --lacquer-raise: oklch(0.47 0.08 125);
+  --ink: oklch(0.19 0.02 110);
+  --ink-raise: oklch(0.25 0.025 110);
+  --ink-line: oklch(0.36 0.03 110);
+  --ink-edge: oklch(0.56 0.035 110);
+  --ink-dim: oklch(0.76 0.035 105);
+  --mist: #bfe3ee;
+}
+
+/* Modern office: a deep charcoal-teal rail and a cool grey ink. Hue 200 sits well away from
+ * jade (165, much lighter) and glaze (82), so the status icons on the rail still pop. */
+:root[data-world="office"] {
+  --lacquer: oklch(0.38 0.045 200);
+  --lacquer-deep: oklch(0.3 0.04 200);
+  --lacquer-raise: oklch(0.45 0.05 200);
+  --ink: oklch(0.19 0.015 215);
+  --ink-raise: oklch(0.25 0.02 215);
+  --ink-line: oklch(0.36 0.025 215);
+  --ink-edge: oklch(0.56 0.03 215);
+  --ink-dim: oklch(0.76 0.025 210);
+  --mist: #d3e5ee;
+}
+
+/* Space station: a deep navy rail and ink, cool and dim like a ship at night. Hue 255 (blue) is far from the
+ * amber of a petition (hue 80) and the jade of a report (hue 165), so both status colours still pop on the rail. */
+:root[data-world="space-station"] {
+  --lacquer: oklch(0.32 0.07 255);
+  --lacquer-deep: oklch(0.25 0.06 255);
+  --lacquer-raise: oklch(0.39 0.08 255);
+  --ink: oklch(0.17 0.025 255);
+  --ink-raise: oklch(0.23 0.03 255);
+  --ink-line: oklch(0.34 0.035 255);
+  --ink-edge: oklch(0.56 0.04 250);
+  --ink-dim: oklch(0.78 0.03 245);
+  --mist: #9fb8d6;
+}

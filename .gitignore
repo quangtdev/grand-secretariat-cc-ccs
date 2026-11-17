@@ -1,0 +1,11 @@
+node_modules
+dist
+.impeccable/review
+.idea
+.impeccable/hook.cache.json
+.impeccable/questions
+# vim swap files
+*.swp
+*.swo
+
+plans/

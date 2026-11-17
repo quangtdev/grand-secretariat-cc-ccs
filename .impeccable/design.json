@@ -1,0 +1,917 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T15:16:43.271Z",
+  "title": "Design System: Grand Secretariat",
+  "extensions": {
+    "colorMeta": {
+      "lacquer": {
+        "role": "primary",
+        "displayName": "Son Lacquer",
+        "canonical": "oklch(0.43 0.14 30)",
+        "srgbApprox": "#8d261b",
+        "tonalRamp": [
+          "oklch(0.15 0.063 30)",
+          "oklch(0.27 0.105 30)",
+          "oklch(0.39 0.140 30)",
+          "oklch(0.51 0.140 30)",
+          "oklch(0.63 0.140 30)",
+          "oklch(0.75 0.112 30)",
+          "oklch(0.87 0.070 30)",
+          "oklch(0.95 0.035 30)"
+        ]
+      },
+      "lacquer-deep": {
+        "role": "primary",
+        "displayName": "Lacquer Deep",
+        "canonical": "oklch(0.35 0.12 30)",
+        "srgbApprox": "#6c170e",
+        "tonalRamp": [
+          "oklch(0.15 0.063 30)",
+          "oklch(0.27 0.105 30)",
+          "oklch(0.39 0.140 30)",
+          "oklch(0.51 0.140 30)",
+          "oklch(0.63 0.140 30)",
+          "oklch(0.75 0.112 30)",
+          "oklch(0.87 0.070 30)",
+          "oklch(0.95 0.035 30)"
+        ]
+      },
+      "lacquer-raise": {
+        "role": "primary",
+        "displayName": "Lacquer Raise",
+        "canonical": "oklch(0.5 0.15 30)",
+        "srgbApprox": "#a8372a",
+        "tonalRamp": [
+          "oklch(0.15 0.063 30)",
+          "oklch(0.27 0.105 30)",
+          "oklch(0.39 0.140 30)",
+          "oklch(0.51 0.140 30)",
+          "oklch(0.63 0.140 30)",
+          "oklch(0.75 0.112 30)",
+          "oklch(0.87 0.070 30)",
+          "oklch(0.95 0.035 30)"
+        ]
+      },
+      "glaze": {
+        "role": "secondary",
+        "displayName": "Imperial Glaze",
+        "canonical": "oklch(0.8 0.145 82)",
+        "srgbApprox": "#ecb33c",
+        "tonalRamp": [
+          "oklch(0.15 0.065 82)",
+          "oklch(0.27 0.109 82)",
+          "oklch(0.39 0.145 82)",
+          "oklch(0.51 0.145 82)",
+          "oklch(0.63 0.145 82)",
+          "oklch(0.75 0.116 82)",
+          "oklch(0.87 0.072 82)",
+          "oklch(0.95 0.036 82)"
+        ]
+      },
+      "glaze-bright": {
+        "role": "secondary",
+        "displayName": "Glaze Bright",
+        "canonical": "oklch(0.86 0.14 86)",
+        "srgbApprox": "#faca59",
+        "tonalRamp": [
+          "oklch(0.15 0.065 82)",
+          "oklch(0.27 0.109 82)",
+          "oklch(0.39 0.145 82)",
+          "oklch(0.51 0.145 82)",
+          "oklch(0.63 0.145 82)",
+          "oklch(0.75 0.116 82)",
+          "oklch(0.87 0.072 82)",
+          "oklch(0.95 0.036 82)"
+        ]
+      },
+      "glaze-ink": {
+        "role": "secondary",
+        "displayName": "Glaze Ink",
+        "canonical": "oklch(0.25 0.05 60)",
+        "srgbApprox": "#331b06",
+        "tonalRamp": [
+          "oklch(0.15 0.065 82)",
+          "oklch(0.27 0.109 82)",
+          "oklch(0.39 0.145 82)",
+          "oklch(0.51 0.145 82)",
+          "oklch(0.63 0.145 82)",
+          "oklch(0.75 0.116 82)",
+          "oklch(0.87 0.072 82)",
+          "oklch(0.95 0.036 82)"
+        ]
+      },
+      "jade": {
+        "role": "tertiary",
+        "displayName": "Report Jade",
+        "canonical": "oklch(0.8 0.085 165)",
+        "srgbApprox": "#88d0b0",
+        "tonalRamp": [
+          "oklch(0.15 0.038 165)",
+          "oklch(0.27 0.064 165)",
+          "oklch(0.39 0.085 165)",
+          "oklch(0.51 0.085 165)",
+          "oklch(0.63 0.085 165)",
+          "oklch(0.75 0.068 165)",
+          "oklch(0.87 0.043 165)",
+          "oklch(0.95 0.021 165)"
+        ]
+      },
+      "jade-ink": {
+        "role": "tertiary",
+        "displayName": "Jade Ink",
+        "canonical": "oklch(0.24 0.04 165)",
+        "srgbApprox": "#09251a",
+        "tonalRamp": [
+          "oklch(0.15 0.038 165)",
+          "oklch(0.27 0.064 165)",
+          "oklch(0.39 0.085 165)",
+          "oklch(0.51 0.085 165)",
+          "oklch(0.63 0.085 165)",
+          "oklch(0.75 0.068 165)",
+          "oklch(0.87 0.043 165)",
+          "oklch(0.95 0.021 165)"
+        ]
+      },
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "oklch(0.95 0.025 85)",
+        "srgbApprox": "#f6eedc",
+        "tonalRamp": [
+          "oklch(0.15 0.011 85)",
+          "oklch(0.27 0.019 85)",
+          "oklch(0.39 0.025 85)",
+          "oklch(0.51 0.025 85)",
+          "oklch(0.63 0.025 85)",
+          "oklch(0.75 0.020 85)",
+          "oklch(0.87 0.013 85)",
+          "oklch(0.95 0.006 85)"
+        ]
+      },
+      "bone-dim": {
+        "role": "neutral",
+        "displayName": "Bone Dim",
+        "canonical": "oklch(0.87 0.05 55)",
+        "srgbApprox": "#efccb6",
+        "tonalRamp": [
+          "oklch(0.15 0.011 85)",
+          "oklch(0.27 0.019 85)",
+          "oklch(0.39 0.025 85)",
+          "oklch(0.51 0.025 85)",
+          "oklch(0.63 0.025 85)",
+          "oklch(0.75 0.020 85)",
+          "oklch(0.87 0.013 85)",
+          "oklch(0.95 0.006 85)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.19 0.015 40)",
+        "srgbApprox": "#1a120f",
+        "tonalRamp": [
+          "oklch(0.15 0.007 40)",
+          "oklch(0.27 0.011 40)",
+          "oklch(0.39 0.015 40)",
+          "oklch(0.51 0.015 40)",
+          "oklch(0.63 0.015 40)",
+          "oklch(0.75 0.012 40)",
+          "oklch(0.87 0.007 40)",
+          "oklch(0.95 0.004 40)"
+        ]
+      },
+      "ink-raise": {
+        "role": "neutral",
+        "displayName": "Ink Raise",
+        "canonical": "oklch(0.25 0.02 40)",
+        "srgbApprox": "#2a1e1a",
+        "tonalRamp": [
+          "oklch(0.15 0.007 40)",
+          "oklch(0.27 0.011 40)",
+          "oklch(0.39 0.015 40)",
+          "oklch(0.51 0.015 40)",
+          "oklch(0.63 0.015 40)",
+          "oklch(0.75 0.012 40)",
+          "oklch(0.87 0.007 40)",
+          "oklch(0.95 0.004 40)"
+        ]
+      },
+      "ink-line": {
+        "role": "neutral",
+        "displayName": "Ink Line",
+        "canonical": "oklch(0.36 0.03 40)",
+        "srgbApprox": "#4b3831",
+        "tonalRamp": [
+          "oklch(0.15 0.007 40)",
+          "oklch(0.27 0.011 40)",
+          "oklch(0.39 0.015 40)",
+          "oklch(0.51 0.015 40)",
+          "oklch(0.63 0.015 40)",
+          "oklch(0.75 0.012 40)",
+          "oklch(0.87 0.007 40)",
+          "oklch(0.95 0.004 40)"
+        ]
+      },
+      "ink-dim": {
+        "role": "neutral",
+        "displayName": "Ink Dim",
+        "canonical": "oklch(0.76 0.03 60)",
+        "srgbApprox": "#c0ad9e",
+        "tonalRamp": [
+          "oklch(0.15 0.007 40)",
+          "oklch(0.27 0.011 40)",
+          "oklch(0.39 0.015 40)",
+          "oklch(0.51 0.015 40)",
+          "oklch(0.63 0.015 40)",
+          "oklch(0.75 0.012 40)",
+          "oklch(0.87 0.007 40)",
+          "oklch(0.95 0.004 40)"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Morning Mist",
+        "canonical": "#cdd2c4",
+        "tonalRamp": [
+          "oklch(0.15 0.007 125)",
+          "oklch(0.27 0.011 125)",
+          "oklch(0.39 0.015 125)",
+          "oklch(0.51 0.015 125)",
+          "oklch(0.63 0.015 125)",
+          "oklch(0.75 0.012 125)",
+          "oklch(0.87 0.007 125)",
+          "oklch(0.95 0.004 125)"
+        ]
+      },
+      "terminal-ground": {
+        "role": "neutral",
+        "displayName": "Terminal Ground",
+        "canonical": "#17110f",
+        "tonalRamp": [
+          "oklch(0.15 0.007 40)",
+          "oklch(0.27 0.011 40)",
+          "oklch(0.39 0.015 40)",
+          "oklch(0.51 0.015 40)",
+          "oklch(0.63 0.015 40)",
+          "oklch(0.75 0.012 40)",
+          "oklch(0.87 0.007 40)",
+          "oklch(0.95 0.004 40)"
+        ]
+      },
+      "scene-lacquer": {
+        "role": "primary",
+        "displayName": "Scene Lacquer",
+        "canonical": "#c23a22",
+        "tonalRamp": [
+          "oklch(0.15 0.077 33)",
+          "oklch(0.27 0.128 33)",
+          "oklch(0.39 0.170 33)",
+          "oklch(0.51 0.170 33)",
+          "oklch(0.63 0.170 33)",
+          "oklch(0.75 0.136 33)",
+          "oklch(0.87 0.085 33)",
+          "oklch(0.95 0.043 33)"
+        ]
+      },
+      "scene-lacquer-dark": {
+        "role": "primary",
+        "displayName": "Scene Lacquer Dark",
+        "canonical": "#8a2a1c",
+        "tonalRamp": [
+          "oklch(0.15 0.077 33)",
+          "oklch(0.27 0.128 33)",
+          "oklch(0.39 0.170 33)",
+          "oklch(0.51 0.170 33)",
+          "oklch(0.63 0.170 33)",
+          "oklch(0.75 0.136 33)",
+          "oklch(0.87 0.085 33)",
+          "oklch(0.95 0.043 33)"
+        ]
+      },
+      "scene-glaze": {
+        "role": "secondary",
+        "displayName": "Scene Glaze",
+        "canonical": "#e3a72b",
+        "tonalRamp": [
+          "oklch(0.15 0.065 82)",
+          "oklch(0.27 0.109 82)",
+          "oklch(0.39 0.145 82)",
+          "oklch(0.51 0.145 82)",
+          "oklch(0.63 0.145 82)",
+          "oklch(0.75 0.116 82)",
+          "oklch(0.87 0.072 82)",
+          "oklch(0.95 0.036 82)"
+        ]
+      },
+      "scene-glaze-dark": {
+        "role": "secondary",
+        "displayName": "Scene Glaze Dark",
+        "canonical": "#b97f16",
+        "tonalRamp": [
+          "oklch(0.15 0.065 82)",
+          "oklch(0.27 0.109 82)",
+          "oklch(0.39 0.145 82)",
+          "oklch(0.51 0.145 82)",
+          "oklch(0.63 0.145 82)",
+          "oklch(0.75 0.116 82)",
+          "oklch(0.87 0.072 82)",
+          "oklch(0.95 0.036 82)"
+        ]
+      },
+      "scene-gold": {
+        "role": "secondary",
+        "displayName": "Throne Gold",
+        "canonical": "#d9a441",
+        "tonalRamp": [
+          "oklch(0.15 0.054 80)",
+          "oklch(0.27 0.090 80)",
+          "oklch(0.39 0.120 80)",
+          "oklch(0.51 0.120 80)",
+          "oklch(0.63 0.120 80)",
+          "oklch(0.75 0.096 80)",
+          "oklch(0.87 0.060 80)",
+          "oklch(0.95 0.030 80)"
+        ]
+      },
+      "scene-jade": {
+        "role": "tertiary",
+        "displayName": "Scene Jade",
+        "canonical": "#7fc4a4",
+        "tonalRamp": [
+          "oklch(0.15 0.038 165)",
+          "oklch(0.27 0.064 165)",
+          "oklch(0.39 0.085 165)",
+          "oklch(0.51 0.085 165)",
+          "oklch(0.63 0.085 165)",
+          "oklch(0.75 0.068 165)",
+          "oklch(0.87 0.043 165)",
+          "oklch(0.95 0.021 165)"
+        ]
+      },
+      "scene-stone": {
+        "role": "neutral",
+        "displayName": "Paving Stone",
+        "canonical": "#b9ad98",
+        "tonalRamp": [
+          "oklch(0.15 0.013 85)",
+          "oklch(0.27 0.022 85)",
+          "oklch(0.39 0.030 85)",
+          "oklch(0.51 0.030 85)",
+          "oklch(0.63 0.030 85)",
+          "oklch(0.75 0.024 85)",
+          "oklch(0.87 0.015 85)",
+          "oklch(0.95 0.007 85)"
+        ]
+      },
+      "scene-stone-path": {
+        "role": "neutral",
+        "displayName": "Path Stone",
+        "canonical": "#d3c8b2",
+        "tonalRamp": [
+          "oklch(0.15 0.013 85)",
+          "oklch(0.27 0.022 85)",
+          "oklch(0.39 0.030 85)",
+          "oklch(0.51 0.030 85)",
+          "oklch(0.63 0.030 85)",
+          "oklch(0.75 0.024 85)",
+          "oklch(0.87 0.015 85)",
+          "oklch(0.95 0.007 85)"
+        ]
+      },
+      "scene-stone-dark": {
+        "role": "neutral",
+        "displayName": "Stone Dark",
+        "canonical": "#8f8574",
+        "tonalRamp": [
+          "oklch(0.15 0.013 85)",
+          "oklch(0.27 0.022 85)",
+          "oklch(0.39 0.030 85)",
+          "oklch(0.51 0.030 85)",
+          "oklch(0.63 0.030 85)",
+          "oklch(0.75 0.024 85)",
+          "oklch(0.87 0.015 85)",
+          "oklch(0.95 0.007 85)"
+        ]
+      },
+      "scene-wood": {
+        "role": "neutral",
+        "displayName": "Desk Wood",
+        "canonical": "#4a2c1c",
+        "tonalRamp": [
+          "oklch(0.15 0.023 50)",
+          "oklch(0.27 0.038 50)",
+          "oklch(0.39 0.050 50)",
+          "oklch(0.51 0.050 50)",
+          "oklch(0.63 0.050 50)",
+          "oklch(0.75 0.040 50)",
+          "oklch(0.87 0.025 50)",
+          "oklch(0.95 0.013 50)"
+        ]
+      },
+      "scene-paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f1e8d2",
+        "tonalRamp": [
+          "oklch(0.15 0.011 85)",
+          "oklch(0.27 0.019 85)",
+          "oklch(0.39 0.025 85)",
+          "oklch(0.51 0.025 85)",
+          "oklch(0.63 0.025 85)",
+          "oklch(0.75 0.020 85)",
+          "oklch(0.87 0.013 85)",
+          "oklch(0.95 0.006 85)"
+        ]
+      },
+      "scene-straw": {
+        "role": "neutral",
+        "displayName": "Straw",
+        "canonical": "#d9c08a",
+        "tonalRamp": [
+          "oklch(0.15 0.032 88)",
+          "oklch(0.27 0.053 88)",
+          "oklch(0.39 0.070 88)",
+          "oklch(0.51 0.070 88)",
+          "oklch(0.63 0.070 88)",
+          "oklch(0.75 0.056 88)",
+          "oklch(0.87 0.035 88)",
+          "oklch(0.95 0.018 88)"
+        ]
+      },
+      "scene-skin": {
+        "role": "neutral",
+        "displayName": "Skin",
+        "canonical": "#d9a57e",
+        "tonalRamp": [
+          "oklch(0.15 0.032 55)",
+          "oklch(0.27 0.053 55)",
+          "oklch(0.39 0.070 55)",
+          "oklch(0.51 0.070 55)",
+          "oklch(0.63 0.070 55)",
+          "oklch(0.75 0.056 55)",
+          "oklch(0.87 0.035 55)",
+          "oklch(0.95 0.018 55)"
+        ]
+      },
+      "robe-indigo": {
+        "role": "neutral",
+        "displayName": "Robe Indigo",
+        "canonical": "#2f4a73",
+        "tonalRamp": [
+          "oklch(0.15 0.036 258)",
+          "oklch(0.27 0.060 258)",
+          "oklch(0.39 0.080 258)",
+          "oklch(0.51 0.080 258)",
+          "oklch(0.63 0.080 258)",
+          "oklch(0.75 0.064 258)",
+          "oklch(0.87 0.040 258)",
+          "oklch(0.95 0.020 258)"
+        ]
+      },
+      "robe-umber": {
+        "role": "neutral",
+        "displayName": "Robe Umber",
+        "canonical": "#6a4a32",
+        "tonalRamp": [
+          "oklch(0.15 0.023 50)",
+          "oklch(0.27 0.038 50)",
+          "oklch(0.39 0.050 50)",
+          "oklch(0.51 0.050 50)",
+          "oklch(0.63 0.050 50)",
+          "oklch(0.75 0.040 50)",
+          "oklch(0.87 0.025 50)",
+          "oklch(0.95 0.013 50)"
+        ]
+      },
+      "robe-leaf": {
+        "role": "neutral",
+        "displayName": "Robe Leaf",
+        "canonical": "#4d6240",
+        "tonalRamp": [
+          "oklch(0.15 0.027 135)",
+          "oklch(0.27 0.045 135)",
+          "oklch(0.39 0.060 135)",
+          "oklch(0.51 0.060 135)",
+          "oklch(0.63 0.060 135)",
+          "oklch(0.75 0.048 135)",
+          "oklch(0.87 0.030 135)",
+          "oklch(0.95 0.015 135)"
+        ]
+      },
+      "robe-plum": {
+        "role": "neutral",
+        "displayName": "Robe Plum",
+        "canonical": "#5b4a6a",
+        "tonalRamp": [
+          "oklch(0.15 0.023 310)",
+          "oklch(0.27 0.038 310)",
+          "oklch(0.39 0.050 310)",
+          "oklch(0.51 0.050 310)",
+          "oklch(0.63 0.050 310)",
+          "oklch(0.75 0.040 310)",
+          "oklch(0.87 0.025 310)",
+          "oklch(0.95 0.013 310)"
+        ]
+      },
+      "robe-slate-teal": {
+        "role": "neutral",
+        "displayName": "Robe Slate Teal",
+        "canonical": "#3f5f66",
+        "tonalRamp": [
+          "oklch(0.15 0.018 210)",
+          "oklch(0.27 0.030 210)",
+          "oklch(0.39 0.040 210)",
+          "oklch(0.51 0.040 210)",
+          "oklch(0.63 0.040 210)",
+          "oklch(0.75 0.032 210)",
+          "oklch(0.87 0.020 210)",
+          "oklch(0.95 0.010 210)"
+        ]
+      },
+      "robe-madder": {
+        "role": "neutral",
+        "displayName": "Robe Madder",
+        "canonical": "#7a3f3a",
+        "tonalRamp": [
+          "oklch(0.15 0.036 22)",
+          "oklch(0.27 0.060 22)",
+          "oklch(0.39 0.080 22)",
+          "oklch(0.51 0.080 22)",
+          "oklch(0.63 0.080 22)",
+          "oklch(0.75 0.064 22)",
+          "oklch(0.87 0.040 22)",
+          "oklch(0.95 0.020 22)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "Title",
+        "purpose": "The product name at the top of the rail. Largest type on the screen."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Dock heading: ticket name or the summon title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base size: tally, control text, messages. 500 for button labels and ticket names, 600 on the primary button."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field and segment labels in the dock; dock notes and the stage hint at 400."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Row meta, dock meta, hints; 500 for roster group headings; tabular figures for elapsed time."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Overhead chips and the status pill; 600 when asking."
+      },
+      "terminal": {
+        "displayName": "Terminal",
+        "purpose": "JetBrains Mono inside the xterm well only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "chip-rest",
+        "value": "0 2px 6px oklch(0.2 0.02 40 / 0.28)",
+        "purpose": "Every overhead chip, lifting it off the paving."
+      },
+      {
+        "name": "chip-raised",
+        "value": "0 4px 12px oklch(0.2 0.02 40 / 0.4)",
+        "purpose": "Hovered chip, or the chip of the agent open in the dock."
+      },
+      {
+        "name": "petition-pulse",
+        "value": "0 0 0 0 oklch(0.8 0.145 82 / 0.7) -> 0 0 0 10px oklch(0.8 0.145 82 / 0)",
+        "purpose": "Glaze ring that keeps leaving an asking chip, layered over chip-rest."
+      },
+      {
+        "name": "dock-overlay",
+        "value": "-12px 0 32px oklch(0.15 0.02 40 / 0.45)",
+        "purpose": "Only at 1100px and below, when the dock covers the stage."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one easing for every shell transition (--ease-out)."
+      },
+      {
+        "name": "state-change",
+        "value": "160ms",
+        "purpose": "Background, border, colour and shadow transitions."
+      },
+      {
+        "name": "press",
+        "value": "120ms translateY(1px)",
+        "purpose": "Button press-down."
+      },
+      {
+        "name": "petition",
+        "value": "2.4s infinite",
+        "purpose": "Asking chip pulse. The only looping animation; removed under reduced motion."
+      },
+      {
+        "name": "figure-walk",
+        "value": "3.4 units/s",
+        "purpose": "A figure walking between desk and throne."
+      },
+      {
+        "name": "figure-run",
+        "value": "6.2 units/s",
+        "purpose": "A figure running to the throne with a petition."
+      },
+      {
+        "name": "pose-ease",
+        "value": "1 - exp(-9 * dt)",
+        "purpose": "Exponential settle between poses; turns use 12."
+      },
+      {
+        "name": "armed-window",
+        "value": "4000ms",
+        "purpose": "How long a two-press destructive button stays armed."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "dock-overlays",
+        "value": "1100px"
+      },
+      {
+        "name": "rail-to-strip",
+        "value": "820px"
+      }
+    ],
+    "scene": {
+      "toneMapping": "NeutralToneMapping",
+      "background": "#cdd2c4",
+      "fog": {
+        "color": "#cdd2c4",
+        "near": 40,
+        "far": 105
+      },
+      "hemisphereLight": {
+        "sky": "#f6f1e4",
+        "ground": "#8a8468",
+        "intensity": 1.45
+      },
+      "sun": {
+        "color": "#fff0d6",
+        "intensity": 2.3,
+        "position": [
+          -14,
+          22,
+          10
+        ],
+        "shadow": "PCFShadowMap 2048"
+      },
+      "camera": {
+        "fov": 36,
+        "position": [
+          0,
+          14.2,
+          26.5
+        ],
+        "target": [
+          0,
+          0.8,
+          0.4
+        ],
+        "distance": [
+          11,
+          40
+        ],
+        "polar": [
+          0.5,
+          1.3
+        ],
+        "azimuth": [
+          -0.75,
+          0.75
+        ],
+        "pan": false
+      },
+      "material": {
+        "type": "MeshStandardMaterial",
+        "flatShading": true,
+        "roughness": 0.85
+      },
+      "figureScale": 1.5,
+      "poses": {
+        "working": "seated, brush arm writing",
+        "idle": "seated, still",
+        "starting": "seated, still",
+        "asking": "kneeling at the throne, glaze scroll overhead",
+        "done": "standing at the throne, jade tablet"
+      }
+    },
+    "terminalTheme": {
+      "background": "#17110f",
+      "foreground": "#ece3d0",
+      "cursor": "#e3a72b",
+      "cursorAccent": "#17110f",
+      "selectionBackground": "#6e1d1499",
+      "black": "#2a211e",
+      "brightBlack": "#75685f",
+      "red": "#e0604c",
+      "green": "#7fc4a4",
+      "yellow": "#e3a72b",
+      "blue": "#7fa3d6",
+      "magenta": "#c48fb0",
+      "cyan": "#79b8bd",
+      "white": "#d6ccb8",
+      "brightWhite": "#fbf5e6"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one glaze action per ground: summon an agent.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 3v10M3 8h10\"/></svg><span>Summon a scribe</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.25rem; padding: 0 0.875rem; border: 1px solid transparent; border-radius: var(--radius, 0.5rem); font: 500 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); cursor: pointer; transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 120ms var(--ease-out); font-weight: 600; background: var(--glaze); color: var(--glaze-ink); } .ds-btn-primary:hover { background: var(--glaze-bright); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--bone); outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.6; cursor: progress; }"
+    },
+    {
+      "name": "Quiet Button (two-press dismiss)",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary action in the dock. A destructive one arms in place (second sample) and asks in its label before confirming.",
+      "html": "<div class=\"ds-quiet-wrap\"><button class=\"ds-btn-quiet\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6.5 2.5h-3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3\"/><path d=\"M6.5 8h7\"/><path d=\"m10.5 5 3 3-3 3\"/></svg><span>Dismiss</span></button><button class=\"ds-btn-quiet ds-is-armed\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6.5 2.5h-3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3\"/><path d=\"M6.5 8h7\"/><path d=\"m10.5 5 3 3-3 3\"/></svg><span>End this session?</span></button></div>",
+      "css": ".ds-quiet-wrap { display: flex; gap: 0.75rem; padding: 0.75rem; background: var(--ink); } .ds-btn-quiet { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.25rem; padding: 0 0.875rem; border: 1px solid transparent; border-radius: var(--radius, 0.5rem); font: 500 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); cursor: pointer; transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 120ms var(--ease-out); border-color: var(--ink-line); background: transparent; color: var(--bone); } .ds-btn-quiet:hover { background: var(--ink-raise); border-color: var(--ink-dim); } .ds-btn-quiet:active { transform: translateY(1px); } .ds-btn-quiet:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 2px; } .ds-btn-quiet.ds-is-armed { background: oklch(0.55 0.17 28); border-color: transparent; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Square, transparent, labelled for assistive tech. Closes the dock.",
+      "html": "<div class=\"ds-icon-wrap\"><button class=\"ds-btn-icon\" type=\"button\" aria-label=\"Close panel\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m4 4 8 8M12 4l-8 8\"/></svg></button></div>",
+      "css": ".ds-icon-wrap { display: inline-flex; padding: 0.75rem; background: var(--ink); } .ds-btn-icon { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.25rem; padding: 0 0.875rem; border: 1px solid transparent; border-radius: var(--radius, 0.5rem); font: 500 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); cursor: pointer; transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 120ms var(--ease-out); width: 2.25rem; padding: 0; background: transparent; color: var(--bone); } .ds-btn-icon:hover { background: var(--ink-raise); } .ds-btn-icon:active { transform: translateY(1px); } .ds-btn-icon:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 2px; }"
+    },
+    {
+      "name": "Overhead Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill buttons anchored above each figure: working (ink), asking (glaze, pulsing until answered), done (jade), failed (bone), and the lacquer summon chip.",
+      "html": "<div class=\"ds-chip-stage\"><button class=\"ds-chip\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M13.5 2.5 7 9\"/><path d=\"M7 9c-1.6-.3-3 .7-3.2 2.2-.1 1-.6 1.7-1.3 2.1 2.6.6 5.3-.4 5.6-2.6C8.2 10 7.7 9.3 7 9Z\"/></svg><span>GS-101 court test</span></button><button class=\"ds-chip ds-chip-asking\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4.5 2.5h7v9.5a1.5 1.5 0 0 0 3 0v-1h-3\"/><path d=\"M4.5 2.5a1.5 1.5 0 0 0-3 0v1h3v8.5a1.5 1.5 0 0 0 1.5 1.5h7\"/><path d=\"M6.5 6h3M6.5 8.5h3\"/></svg><span>GS-202 report export</span></button><button class=\"ds-chip ds-chip-done\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2.5\" width=\"11\" height=\"11\" rx=\"2\"/><path d=\"m5.5 8.2 1.8 1.8 3.4-3.8\"/></svg><span>GS-303 fix login</span></button><button class=\"ds-chip ds-chip-exited\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m4 4 8 8M12 4l-8 8\"/></svg><span>GS-404 bad path</span></button><button class=\"ds-chip ds-chip-summon\" type=\"button\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 3v10M3 8h10\"/></svg><span>Summon a scribe</span></button></div>",
+      "css": ".ds-chip-stage { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1.5rem; background: var(--mist); } .ds-chip { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem 0.25rem 0.5rem; border: 0; border-radius: 999px; font: 500 0.75rem/1.3 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); white-space: nowrap; max-width: 13rem; background: color-mix(in oklch, var(--ink) 88%, transparent); color: var(--bone); cursor: pointer; box-shadow: 0 2px 6px oklch(0.2 0.02 40 / 0.28); transition: background-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out); } .ds-chip:hover { background: var(--ink); box-shadow: 0 4px 12px oklch(0.2 0.02 40 / 0.4); } .ds-chip:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 2px; } .ds-chip-asking { background: var(--glaze); color: var(--glaze-ink); font-weight: 600; animation: ds-petition 2.4s var(--ease-out) infinite; } .ds-chip-asking:hover { background: var(--glaze-bright); } .ds-chip-done, .ds-chip-done:hover { background: var(--jade); color: var(--jade-ink); } .ds-chip-exited, .ds-chip-exited:hover { background: var(--bone); color: var(--lacquer-deep); } .ds-chip-summon { background: var(--lacquer); padding: 0.375rem 0.75rem 0.375rem 0.625rem; } .ds-chip-summon:hover { background: var(--lacquer-raise); } @keyframes ds-petition { 0% { box-shadow: 0 2px 6px oklch(0.2 0.02 40 / 0.28), 0 0 0 0 oklch(0.8 0.145 82 / 0.7); } 70%, 100% { box-shadow: 0 2px 6px oklch(0.2 0.02 40 / 0.28), 0 0 0 10px oklch(0.8 0.145 82 / 0); } } @media (prefers-reduced-motion: reduce) { .ds-chip-asking { animation: none; } }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "Non-interactive status in the dock header, same vocabulary and fills as the chips.",
+      "html": "<div class=\"ds-pill-wrap\"><span class=\"ds-pill\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M13.5 2.5 7 9\"/><path d=\"M7 9c-1.6-.3-3 .7-3.2 2.2-.1 1-.6 1.7-1.3 2.1 2.6.6 5.3-.4 5.6-2.6C8.2 10 7.7 9.3 7 9Z\"/></svg><span>Working</span></span><span class=\"ds-pill ds-pill-asking\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4.5 2.5h7v9.5a1.5 1.5 0 0 0 3 0v-1h-3\"/><path d=\"M4.5 2.5a1.5 1.5 0 0 0-3 0v1h3v8.5a1.5 1.5 0 0 0 1.5 1.5h7\"/><path d=\"M6.5 6h3M6.5 8.5h3\"/></svg><span>Needs your ruling</span></span><span class=\"ds-pill ds-pill-done\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2.5\" width=\"11\" height=\"11\" rx=\"2\"/><path d=\"m5.5 8.2 1.8 1.8 3.4-3.8\"/></svg><span>Reporting back</span></span></div>",
+      "css": ".ds-pill-wrap { display: flex; gap: 0.5rem; padding: 0.75rem; background: var(--ink); } .ds-pill { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem 0.25rem 0.5rem; border: 0; border-radius: 999px; font: 500 0.75rem/1.3 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); white-space: nowrap; background: var(--ink-raise); color: var(--bone); } .ds-pill-asking { background: var(--glaze); color: var(--glaze-ink); } .ds-pill-done { background: var(--jade); color: var(--jade-ink); }"
+    },
+    {
+      "name": "Roster Rail",
+      "kind": "nav",
+      "refersTo": "roster-row",
+      "description": "The lacquer rail: agents grouped by where they stand, each row a button that opens the live terminal.",
+      "html": "<nav class=\"ds-rail\" aria-label=\"Court roster\"><h2 class=\"ds-roster-heading\">Before the throne</h2><ul class=\"ds-roster-list\"><li><button type=\"button\" class=\"ds-roster-row\"><span class=\"ds-roster-icon ds-seal-asking\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4.5 2.5h7v9.5a1.5 1.5 0 0 0 3 0v-1h-3\"/><path d=\"M4.5 2.5a1.5 1.5 0 0 0-3 0v1h3v8.5a1.5 1.5 0 0 0 1.5 1.5h7\"/><path d=\"M6.5 6h3M6.5 8.5h3\"/></svg></span><span class=\"ds-roster-ticket\">GS-202 report export</span><span class=\"ds-roster-time\">12m</span><span class=\"ds-roster-meta\">Needs your ruling · scribe-agent</span></button></li><li><button type=\"button\" class=\"ds-roster-row\"><span class=\"ds-roster-icon ds-seal-done\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2.5\" width=\"11\" height=\"11\" rx=\"2\"/><path d=\"m5.5 8.2 1.8 1.8 3.4-3.8\"/></svg></span><span class=\"ds-roster-ticket\">GS-303 fix login</span><span class=\"ds-roster-time\">3m</span><span class=\"ds-roster-meta\">Reporting back · scribe-agent</span></button></li></ul><h2 class=\"ds-roster-heading\">At their desks</h2><ul class=\"ds-roster-list\"><li><button type=\"button\" class=\"ds-roster-row\" aria-current=\"true\"><span class=\"ds-roster-icon\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M13.5 2.5 7 9\"/><path d=\"M7 9c-1.6-.3-3 .7-3.2 2.2-.1 1-.6 1.7-1.3 2.1 2.6.6 5.3-.4 5.6-2.6C8.2 10 7.7 9.3 7 9Z\"/></svg></span><span class=\"ds-roster-ticket\">GS-101 court test</span><span class=\"ds-roster-time\">1h 05m</span><span class=\"ds-roster-meta\">Working · scribe-agent</span></button></li></ul></nav>",
+      "css": ".ds-rail { width: 17rem; padding: 0.75rem; background: var(--lacquer); color: var(--bone); font: 400 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); } .ds-roster-heading { margin: 1.25rem 0 0.375rem; padding: 0 0.5rem; font-size: 0.75rem; font-weight: 500; color: var(--bone-dim); } .ds-roster-heading:first-child { margin-top: 0.25rem; } .ds-roster-list { display: grid; gap: 0.125rem; margin: 0; padding: 0; list-style: none; } .ds-roster-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 0.5rem; align-items: center; width: 100%; padding: 0.5rem; border: 0; border-radius: var(--radius, 0.5rem); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; transition: background-color 160ms var(--ease-out); } .ds-roster-row:hover { background: var(--lacquer-raise); } .ds-roster-row[aria-current=\"true\"] { background: var(--lacquer-deep); } .ds-roster-row:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 2px; } .ds-roster-icon { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; } .ds-seal-asking { background: var(--glaze); color: var(--glaze-ink); } .ds-seal-done { background: var(--jade); color: var(--jade-ink); } .ds-roster-ticket { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-roster-time { font-size: 0.75rem; font-variant-numeric: tabular-nums; color: var(--bone-dim); } .ds-roster-meta { grid-column: 2 / -1; font-size: 0.75rem; color: var(--bone-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Dock form field: label above, control, hint below. Focus swaps the edge for the glaze-bright outline.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Ticket</span><input class=\"ds-input\" type=\"text\" placeholder=\"GS-736 fix report export\"><span class=\"ds-field-hint\">Shown over the scribe's head. Left empty, the repository name is used.</span></label>",
+      "css": ".ds-field { display: grid; gap: 0.375rem; max-width: 34rem; padding: 1.125rem; background: var(--ink); color: var(--bone); font: 400 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); } .ds-field-label { font-size: 0.8125rem; font-weight: 500; } .ds-field-hint { font-size: 0.75rem; color: var(--ink-dim); } .ds-input { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--ink-line); border-radius: var(--radius, 0.5rem); background: var(--ink-raise); color: inherit; font: inherit; caret-color: var(--glaze); transition: border-color 160ms var(--ease-out); } .ds-input::placeholder { color: var(--ink-dim); opacity: 1; } .ds-input:hover { border-color: var(--ink-dim); } .ds-input:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 0; border-color: transparent; }"
+    },
+    {
+      "name": "Segmented Choice",
+      "kind": "input",
+      "refersTo": "segments",
+      "description": "Radio group as a track of segments; the checked one is lacquer. For two to three exclusive options.",
+      "html": "<div class=\"ds-seg-wrap\"><div class=\"ds-segments\"><label class=\"ds-segment\"><input type=\"radio\" name=\"ds-mode\" checked><span>New</span></label><label class=\"ds-segment\"><input type=\"radio\" name=\"ds-mode\"><span>Continue last</span></label><label class=\"ds-segment\"><input type=\"radio\" name=\"ds-mode\"><span>Pick an old one</span></label></div></div>",
+      "css": ".ds-seg-wrap { padding: 1.125rem; background: var(--ink); } .ds-segments { display: inline-flex; gap: 0.25rem; padding: 0.25rem; border-radius: var(--radius, 0.5rem); background: var(--ink-raise); } .ds-segment { position: relative; cursor: pointer; } .ds-segment input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; } .ds-segment span { display: block; padding: 0.3125rem 0.875rem; border-radius: calc(var(--radius, 0.5rem) - 0.125rem); font: 500 0.8125rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); color: var(--ink-dim); transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out); } .ds-segment:hover span { color: var(--bone); } .ds-segment input:checked + span { background: var(--lacquer); color: var(--bone); } .ds-segment input:focus-visible + span { outline: 2px solid var(--glaze-bright); outline-offset: 2px; }"
+    },
+    {
+      "name": "Dock Header",
+      "kind": "custom",
+      "refersTo": "dock",
+      "description": "Head of the ink dock: ticket, one-line meta, status pill, quiet action, close.",
+      "html": "<header class=\"ds-dock-header\"><div class=\"ds-dock-title\"><h2>GS-202 report export</h2><p>~/workspaces/personal/scribe-agent</p></div><span class=\"ds-dock-pill\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4.5 2.5h7v9.5a1.5 1.5 0 0 0 3 0v-1h-3\"/><path d=\"M4.5 2.5a1.5 1.5 0 0 0-3 0v1h3v8.5a1.5 1.5 0 0 0 1.5 1.5h7\"/><path d=\"M6.5 6h3M6.5 8.5h3\"/></svg><span>Needs your ruling</span></span><button type=\"button\" class=\"ds-dock-close\" aria-label=\"Close panel\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m4 4 8 8M12 4l-8 8\"/></svg></button></header>",
+      "css": ".ds-dock-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0.75rem 0.75rem 1.125rem; border-bottom: 1px solid var(--ink-line); background: var(--ink); color: var(--bone); font: 400 0.875rem/1.45 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); } .ds-dock-title { flex: 1; min-width: 0; } .ds-dock-title h2 { margin: 0; font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-dock-title p { margin: 0; font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-dock-pill { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem 0.25rem 0.5rem; border: 0; border-radius: 999px; font: 500 0.75rem/1.3 var(--font-ui, \"Be Vietnam Pro\", system-ui, sans-serif); white-space: nowrap; background: var(--glaze); color: var(--glaze-ink); } .ds-dock-close { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; min-height: 2.25rem; padding: 0; border: 1px solid transparent; border-radius: var(--radius, 0.5rem); background: transparent; color: inherit; cursor: pointer; transition: background-color 160ms var(--ease-out); } .ds-dock-close:hover { background: var(--ink-raise); } .ds-dock-close:focus-visible { outline: 2px solid var(--glaze-bright); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Morning Audience",
+    "overview": "The screen is the court of Hue at a morning audience, seen from the king's side of the glass. Agents are scribes at low writing desks in a paved courtyard. One that needs the user leaves its desk, runs up the central path, and kneels below the throne steps with a yellow petition held over its hat. The scene is the interface: who works and who waits is read from where figures stand and how they hold themselves, before any label is read.\n\nThree grounds hold everything, and each is one material. A vermilion lacquer rail on the left carries the roster. A hazy daylight stage in the middle carries the 3D court. An ink-dark dock on the right, hidden until opened, carries a real terminal or the summon form. Colour is spent like court colour: lacquer is the building, imperial yellow glaze belongs to the roofs and to whatever needs the king, jade is a finished report. Everything else is stone, wood, paper and straw.\n\nThe register is an operating tool that stays open for hours beside an editor. Type is small, even and unshouting. Surfaces are flat. Motion is short and exists to report a state change, with one exception that is the signature: a waiting petition keeps calling until it is answered.",
+    "keyCharacteristics": [
+      "One screen, three grounds: lacquer rail, mist stage, ink dock.",
+      "State is carried four ways at once: place in the court, posture, icon, colour.",
+      "Imperial yellow is the king's colour. In the shell it marks what needs the user and where the user's hand is.",
+      "One UI family at three weights; monospace lives only inside the terminal.",
+      "Flat surfaces; shadow only under things that float over the scene.",
+      "The dock sits beside the scene. Nothing opens as a modal."
+    ],
+    "rules": [
+      {
+        "name": "The King's Yellow Rule",
+        "body": "In the rail, the chips and the dock, glaze appears only on what needs the king (an asking agent, the primary action, a note to read) and on where the king's hand is (focus ring, caret, selection, the ring under a pointed-at figure). In the scene it is also the roofs, the wall caps and the king's own robe, because that is their material. A courtier's robe, a heading or a decoration never wears it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Jade Closes Rule",
+        "body": "Jade means a finished report and nothing else. It is not a general \"success\" green.",
+        "section": "colors"
+      },
+      {
+        "name": "The Own-Ink Rule",
+        "body": "Every filled status colour brings its own text colour: glaze-ink on glaze, jade-ink on jade, lacquer-deep on bone. Bone text never sits on glaze, jade or bone.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ground Keeps Its Dim Rule",
+        "body": "Secondary text is bone-dim on lacquer and ink-dim on ink. The two are not interchangeable.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Stays Inside Rule",
+        "body": "JetBrains Mono appears only inside the terminal well. Ticket ids, elapsed times and paths in the shell are set in Be Vietnam Pro; numbers that update in place use tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three Weights Rule",
+        "body": "400 reads, 500 names, 600 leads. No other weight, no uppercase, no tracked-out labels. The only letter-spacing in the system is -0.01em on the title.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Group headings, labels, buttons and statuses are sentence case in plain words from the court vocabulary (\"Before the throne\", \"At their desks\", \"Needs your ruling\").",
+        "section": "typography"
+      },
+      {
+        "name": "The Docked, Never Modal Rule",
+        "body": "The terminal and the summon form open in the dock beside the scene. The court stays visible and live while the user types.",
+        "section": "layout"
+      },
+      {
+        "name": "The Grouped By Place Rule",
+        "body": "Lists are grouped by where the agent stands in the court. The scene and the roster always tell the same story in the same order.",
+        "section": "layout"
+      },
+      {
+        "name": "The Floating Earns Shadow Rule",
+        "body": "A surface gets a shadow only when it is physically over the scene. Anything seated in the rail or the dock is flat.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Sun Rule",
+        "body": "The court has one shadow-casting light. Shadow tint is warm ink (hue 40), never neutral black.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Place and Posture Rule",
+        "body": "A status that matters must be readable with colour removed: the figure is somewhere different and holding itself differently, and its chip and row carry a distinct icon.",
+        "section": "components"
+      },
+      {
+        "name": "The Petition Holds Rule",
+        "body": "The only looping motion in the system belongs to an agent waiting on the user: the chip pulse and the lifted scroll. It does not time out or settle. It ends when the user answers.",
+        "section": "components"
+      },
+      {
+        "name": "The One Vocabulary Rule",
+        "body": "Each status has one label and one icon, defined once and used unchanged by the roster, the chips and the dock.",
+        "section": "components"
+      },
+      {
+        "name": "The Two-Press Rule",
+        "body": "Ending a session arms the same button in place and asks in its label. Destructive actions do not open a dialog.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do keep every new surface on one of the three grounds: lacquer rail, mist stage, ink dock. Put secondary text in that ground's own dim (bone-dim on lacquer, ink-dim on ink).",
+      "Do spend glaze only on what needs the user or on where the user's hand is, with glaze-ink text on it.",
+      "Do give every new status a place in the court, a posture, an icon from the court's objects and a label in the shared vocabulary before giving it a colour.",
+      "Do use the pill (999px) for anything that floats over the scene or names a status, and the 0.5rem corner for anything that is pressed or typed into.",
+      "Do keep type inside the built ramp (1.25, 1, 0.875, 0.8125, 0.75rem) and the three weights (400, 500, 600), in sentence case.",
+      "Do draw new icons at 16px with a 1.5px round-capped stroke in the current text colour.",
+      "Do time state transitions at 160ms on `cubic-bezier(0.16, 1, 0.3, 1)` and honour reduced motion by removing travel, loops and pulses while keeping place, posture, icon and colour.",
+      "Do tint shadows with warm ink (hue 40) and take scene colours from the scene palette so the court stays one material world.",
+      "Do make every figure reachable without the canvas: a real button chip over its head and a real button row in the roster."
+    ],
+    "donts": [
+      "Don't use glaze as decoration in the shell, or put a second glaze button on the same ground.",
+      "Don't use jade for anything but a finished report, or robe dyes to signal status.",
+      "Don't set shell text in JetBrains Mono; it belongs to the terminal well.",
+      "Don't use uppercase, letter-spaced labels or a weight outside 400, 500 and 600.",
+      "Don't put a shadow, border or gradient between the three grounds while they sit side by side, or a shadow on anything seated in the rail or dock.",
+      "Don't open the terminal, the summon form or a confirmation as a modal over the court.",
+      "Don't add a second looping animation. The petition is the only thing allowed to keep calling.",
+      "Don't signal a state with a coloured dot alone; the court replaces the status-dot dashboard, it does not sit beside one.",
+      "Don't let chips overlap or let a petition chip be pushed out of place by a lower-priority one."
+    ]
+  }
+}

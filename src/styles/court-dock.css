@@ -1,0 +1,294 @@
+/* The dock: an agent's terminal, or the summon form. Docked beside the scene, never a modal. */
+
+.dock {
+  display: flex;
+  flex-direction: column;
+  width: var(--dock-width, clamp(30rem, 52vw, 64rem)); /* --dock-width: set by dragging the resizer */
+  min-height: 0;
+  background: var(--ink);
+  z-index: var(--z-dock);
+}
+
+/* The dock's left edge: a thin grab strip, visible only while the dock is open. */
+.dock-resizer {
+  position: relative;
+  width: 6px;
+  margin-right: -6px; /* overlaps the dock: no visible gap between the grounds */
+  z-index: calc(var(--z-dock) + 1);
+  cursor: col-resize;
+  touch-action: none;
+  background: transparent;
+  transition: background-color 160ms var(--ease-out);
+}
+.dock-resizer:has(+ .dock[hidden]) { display: none; }
+.dock-resizer:hover, .dock-resizer:focus-visible, .is-resizing-dock .dock-resizer { background: var(--glaze); }
+.dock-resizer:focus-visible { outline: none; }
+/* While dragging: no text selection, and the resize cursor everywhere. */
+.is-resizing-dock { cursor: col-resize; user-select: none; }
+.is-resizing-dock * { cursor: col-resize !important; }
+
+.dock-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.75rem 0.75rem 1.125rem;
+  border-bottom: 1px solid var(--ink-line);
+}
+.dock-title { flex: 1; min-width: 0; }
+.dock-title h2 { font-size: 1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The name is a button: click to rename in place. The pencil always shows, so it reads as editable. */
+.dock-rename {
+  display: inline-flex; align-items: center; gap: 0.4375rem; max-width: 100%;
+  margin-left: -0.375rem; padding: 0.0625rem 0.375rem; border: 0; border-radius: 0.3125rem;
+  background: none; font: inherit; color: inherit; cursor: pointer;
+  transition: background-color 120ms;
+}
+.dock-rename > span { overflow: hidden; text-overflow: ellipsis; }
+.dock-rename .icon { flex: none; width: 14px; height: 14px; opacity: 0.55; transition: opacity 120ms; }
+.dock-rename:hover, .dock-rename:focus-visible { background: color-mix(in oklch, var(--bone) 12%, transparent); }
+.dock-rename:hover .icon, .dock-rename:focus-visible .icon { opacity: 1; color: var(--glaze); }
+.dock-rename-input { width: 100%; padding: 0.0625rem 0.375rem; border: 1px solid var(--glaze); border-radius: 0.25rem; background: transparent; font: inherit; color: inherit; outline: none; }
+.dock-meta { font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: var(--ink-raise);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.status-pill[data-status="asking"] { background: var(--glaze); color: var(--glaze-ink); }
+.status-pill[data-status="done"] { background: var(--jade); color: var(--jade-ink); }
+.status-pill[data-status="exited"] { background: var(--bone); color: var(--lacquer-deep); }
+
+.terminal-host { flex: 1; min-height: 0; padding: 0.625rem 0 0.25rem 0.875rem; background: #17110f; touch-action: pan-x pinch-zoom; /* up-down drags scroll the terminal (ui/terminal-touch-scroll.js); sideways ones pan the page */ }
+.terminal-host .xterm { height: 100%; }
+.terminal-host .xterm-viewport { scrollbar-color: var(--ink-line) transparent; }
+
+.dock-note { padding: 0.5rem 1.125rem; color: var(--glaze); font-size: 0.8125rem; border-top: 1px solid var(--ink-line); }
+.dock-note:empty { display: none; }
+
+/* Summon form */
+.summon-form {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  width: 100%;
+  max-width: 34rem;
+  padding: 1.5rem 1.125rem;
+  overflow-y: auto;
+}
+.field { display: grid; gap: 0.375rem; }
+.field > legend { padding: 0; margin-bottom: 0.375rem; }
+.field-label { font-size: 0.8125rem; font-weight: 500; }
+.field-hint { font-size: 0.75rem; color: var(--ink-dim); }
+
+.summon-form select,
+.summon-form input[type="text"],
+.summon-form textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ink-edge);
+  border-radius: var(--radius);
+  background: var(--ink-raise);
+  caret-color: var(--glaze);
+  transition: border-color 160ms var(--ease-out);
+}
+.summon-form select { min-height: 2.5rem; }
+.summon-form textarea { resize: vertical; min-height: 6rem; line-height: 1.5; }
+.summon-form :is(select, input, textarea):hover { border-color: var(--ink-dim); }
+.summon-form :is(select, input, textarea):focus-visible { outline-offset: 0; border-color: transparent; }
+.summon-form ::placeholder { color: var(--ink-dim); opacity: 1; }
+.summon-form option, .summon-form optgroup { background: var(--ink-raise); color: var(--bone); }
+
+.segments { display: inline-flex; gap: 0.25rem; padding: 0.25rem; border-radius: var(--radius); background: var(--ink-raise); justify-self: start; }
+.segment { position: relative; cursor: pointer; }
+.segment input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.segment span {
+  display: block;
+  padding: 0.3125rem 0.875rem;
+  border-radius: calc(var(--radius) - 0.125rem);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-dim);
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.segment:hover span { color: var(--bone); }
+.segment input:checked + span { background: var(--lacquer); color: var(--bone); }
+.segment input:focus-visible + span { outline: 2px solid var(--glaze-bright); outline-offset: 2px; }
+
+.summon-form .button-primary { justify-self: start; min-width: 9rem; }
+.form-error { color: var(--danger-text); text-wrap: pretty; }
+.form-skeleton {
+  color: var(--ink-dim);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: var(--ink-raise);
+}
+
+/* History: dismissed scribes, newest first, each with Recall and Forget. */
+.history { flex: 1; min-height: 0; overflow-y: auto; padding: 1rem 1.125rem; }
+.history-empty { max-width: 34rem; color: var(--ink-dim); text-wrap: pretty; }
+.history-list { display: grid; gap: 0.25rem; max-width: 44rem; }
+.history-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+  border-radius: var(--radius);
+}
+.history-row:hover { background: var(--ink-raise); }
+.history-text { display: grid; min-width: 0; }
+.history-ticket { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.history-meta { font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.history-recall { min-width: 6.5rem; }
+
+/* Narrow windows: the dock covers the stage instead of squeezing it. */
+@media (max-width: 1100px) {
+  .dock-resizer { display: none; }
+  .dock { position: fixed; inset: 0 0 0 auto; width: min(100vw, 44rem); box-shadow: -12px 0 32px oklch(0.15 0.02 40 / 0.45); }
+}
+
+/* Agent tabs: every scribe, waiting ones first. One short strip, scrolling sideways. */
+.dock-tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem 0;
+  overflow-x: auto;
+  scrollbar-width: thin; /* stays reachable with a plain mouse when there are many scribes */
+}
+.dock-tabs:empty { display: none; }
+.dock-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex: none;
+  max-width: 12rem;
+  min-height: 1.75rem;
+  padding: 0 0.625rem 0 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-dim);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.dock-tab > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dock-tab .icon { width: 14px; height: 14px; }
+.dock-tab:hover { background: var(--ink-raise); color: var(--bone); }
+.dock-tab[aria-current="true"] { background: var(--ink-raise); color: var(--bone); box-shadow: inset 0 0 0 1px var(--ink-line); }
+.dock-tab[data-status="asking"] { background: var(--glaze); color: var(--glaze-ink); font-weight: 600; }
+.dock-tab[data-status="done"] { color: var(--jade); }
+.dock-tab[data-status="done"][aria-current="true"] { background: var(--jade); color: var(--jade-ink); box-shadow: none; }
+.dock-tab[data-status="asking"][aria-current="true"] { box-shadow: inset 0 0 0 2px var(--glaze-ink); }
+
+/* What this agent is doing now. Always one line, so the terminal never jumps. */
+.dock-activity {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.875rem;
+  padding: 0 0.75rem 0 1.125rem;
+  border-bottom: 1px solid var(--ink-line);
+  font-size: 0.8125rem;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+.dock-activity > .icon { width: 14px; height: 14px; }
+.activity-order { flex: 0 1 auto; min-width: 3rem; max-width: 45%; overflow: hidden; text-overflow: ellipsis; }
+.activity-sep { flex: none; opacity: 0.6; }
+.activity-step { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--bone); }
+.activity-ink { flex: none; font-size: 0.75rem; font-variant-numeric: tabular-nums; color: var(--ink-dim); }
+.dock-activity[data-status="asking"] .activity-ink { color: inherit; }
+.activity-time { flex: none; font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.dock-activity[data-status="idle"] .activity-step, .dock-activity[data-status="starting"] .activity-step { color: var(--ink-dim); }
+.dock-activity[data-status="asking"] { background: var(--glaze); color: var(--glaze-ink); border-bottom-color: transparent; }
+.dock-activity[data-status="asking"] .activity-step { color: var(--glaze-ink); font-weight: 600; }
+.dock-activity[data-status="done"] .activity-step { color: var(--jade); }
+.activity-soldiers {
+  display: inline-flex; align-items: center; gap: 0.25rem; flex: none;
+  min-height: 1.375rem; padding: 0 0.5rem 0 0.375rem; border: 0; border-radius: 999px;
+  background: var(--ink-raise); color: var(--bone); font-size: 0.75rem; font-weight: 600; cursor: pointer;
+}
+.activity-soldiers .icon { width: 12px; height: 12px; }
+.activity-soldiers:hover, .activity-soldiers[aria-expanded="true"] { background: var(--lacquer); }
+/* The soldiers' roll drops over the top of the terminal instead of pushing it down. */
+.activity-roll {
+  position: absolute; top: 100%; right: 0.75rem; z-index: 1;
+  display: grid; gap: 0.25rem; width: min(32rem, calc(100% - 1.5rem)); padding: 0.5rem 0.625rem;
+  border-radius: var(--radius); background: var(--ink-raise); color: var(--bone);
+  box-shadow: 0 6px 16px oklch(0.12 0.02 40 / 0.5); font-size: 0.75rem; white-space: normal;
+}
+.activity-roll li { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 0.375rem; align-items: start; }
+.activity-roll .icon { width: 12px; height: 12px; margin-top: 0.1875rem; }
+.activity-roll em { font-style: normal; color: var(--ink-dim); }
+.activity-roll-step { grid-column: 2; color: var(--ink-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Working folder: the list of repositories plus a browser for any other folder. */
+.folder-pick { display: flex; gap: 0.5rem; }
+.folder-pick select { flex: 1; min-width: 0; }
+.folder-browser { display: grid; gap: 0.5rem; padding: 0.75rem; border: 1px solid var(--ink-edge); border-radius: var(--radius); }
+.folder-browser[hidden] { display: none; }
+.folder-path { display: flex; gap: 0.5rem; }
+.folder-path input { flex: 1; min-width: 0; font-family: var(--font-mono, monospace); font-size: 0.8125rem; }
+.folder-list { max-height: 14rem; overflow-y: auto; margin: 0; padding: 0; list-style: none; }
+.folder-list button { width: 100%; padding: 0.375rem 0.5rem; border: 0; border-radius: calc(var(--radius) - 0.125rem); background: transparent; color: inherit; font: inherit; font-size: 0.8125rem; text-align: left; cursor: pointer; }
+.folder-list button:hover { background: var(--ink-raise); }
+.folder-empty { padding: 0.375rem 0.5rem; font-size: 0.8125rem; color: var(--ink-dim); }
+.folder-browser > .button { justify-self: start; }
+
+/* Popup mode: the dock floats in the middle of the court instead of standing beside it.
+   The court keeps the full width and stays clickable around it (the dimming is a shadow).
+   `translate` centres it, so the open/close zoom (a `transform`) never fights the centring. */
+.shell.is-dock-popup .dock-resizer { display: none; }
+.shell.is-dock-popup .dock {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  translate: calc(-50% + var(--popup-dx, 0px)) calc(-50% + var(--popup-dy, 0px)); /* moved by dragging the header */
+  /* --popup-w / --popup-h: set by dragging an edge (dock-popup-resize-by-edges.js) */
+  width: min(var(--popup-w, 72rem), calc(100vw - 1rem));
+  height: min(var(--popup-h, 48rem), calc(100dvh - 1rem));
+  border: 1px solid var(--ink-line);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 24px 64px oklch(0.1 0.02 40 / 0.6), 0 0 0 100vmax oklch(0.1 0.02 40 / 0.35);
+}
+/* Drag the popup by its header or tab strip (see dock-popup-drag-to-move.js). */
+.shell.is-dock-popup :is(.dock-header, .dock-tabs) { cursor: grab; }
+.shell.is-dock-popup :is(.dock-header, .dock-tabs) :is(button, input) { cursor: pointer; }
+.is-moving-popup, .is-moving-popup * { cursor: grabbing !important; user-select: none; }
+/* Resize the popup from any edge or corner; the cursor wins over the terminal's own. */
+.is-on-popup-edge, .is-on-popup-edge * { cursor: var(--popup-edge-cursor) !important; }
+.is-resizing-popup, .is-resizing-popup * { user-select: none; }
+
+/* Annals: one day of the court, a block per scribe; day arrows under the header. */
+.annals-days { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem 0.375rem 1.125rem; border-bottom: 1px solid var(--ink-line); }
+.annals-day { flex: 1; font-size: 0.8125rem; font-weight: 500; }
+.annals-step:disabled { opacity: 0.35; }
+.annals { flex: 1; min-height: 0; overflow-y: auto; padding: 0.75rem 1.125rem 1rem; display: grid; align-content: start; gap: 0.25rem; }
+.annals-empty { max-width: 34rem; color: var(--ink-dim); text-wrap: pretty; }
+.annals-scribe { max-width: 44rem; border-radius: var(--radius); }
+.annals-scribe:hover, .annals-scribe[open] { background: var(--ink-raise); }
+.annals-scribe > summary {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0.75rem;
+  padding: 0.5rem 0.75rem; cursor: pointer; list-style: none;
+}
+.annals-scribe > summary::-webkit-details-marker { display: none; }
+.annals-scribe > summary:focus-visible { outline: 2px solid var(--glaze); outline-offset: -2px; border-radius: var(--radius); }
+.annals-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.annals-meta { font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; align-self: center; }
+.annals-counts { grid-column: 1 / -1; font-size: 0.75rem; color: var(--ink-dim); text-wrap: pretty; }
+.annals-heading { padding: 0.5rem 0.75rem 0.125rem; font-size: 0.75rem; font-weight: 600; color: var(--ink-dim); }
+.annals-list { display: grid; gap: 0.125rem; padding: 0 0.75rem 0.5rem; font-size: 0.8125rem; }
+.annals-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.625rem; }
+.annals-list time { color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.annals-list li > span { overflow-wrap: anywhere; }
+.annals-files li { display: block; overflow-wrap: anywhere; }
