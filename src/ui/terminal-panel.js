@@ -10,6 +10,7 @@ import { dockModeToggleHtml } from './dock-popup-or-docked-presentation.js';
 import { DockActivityStrip } from './dock-activity-strip.js';
 import { DockAgentTabs } from './dock-agent-tabs.js';
 import { enableTerminalTouchScroll } from './terminal-touch-scroll.js';
+import { canDefer } from './deferred-petitions.js';
 
 const ORDER_WINDOW_MS = 8000; // Enter counts as an order only this soon after typing
 
@@ -25,9 +26,10 @@ export class TerminalPanel {
    * @param {HTMLElement} dock
    * @param {{onClose: () => void, onSwitch: (id: string) => void, onTyping?: (id: string) => void, onOrder?: (id: string) => void}} handlers
    *   onSwitch: another agent's tab was picked; onTyping: a printable key was typed;
-   *   onOrder: a prompt was submitted (Enter after real text)
+   *   onOrder: a prompt was submitted (Enter after real text);
+   *   onDefer(id, on): send a waiting agent back to its desk (true) or call it up again (false)
    */
-  constructor(dock, { onClose, onSwitch, onTyping = () => {}, onOrder = () => {} }) {
+  constructor(dock, { onClose, onSwitch, onTyping = () => {}, onOrder = () => {}, onDefer = () => {} }) {
     this.dock = dock;
     this.onClose = onClose;
     this.onSwitch = onSwitch;
@@ -35,6 +37,7 @@ export class TerminalPanel {
     setInterval(() => this.strip?.update(this.session), 30_000); // keeps the elapsed time fresh
     this.onTyping = onTyping;
     this.onOrder = onOrder;
+    this.onDefer = onDefer;
     this.typed = 0; // printable characters typed since the last Enter
     this.lastTypedAt = 0; // when the last of them was typed (ms)
     this.session = null;
@@ -57,6 +60,7 @@ export class TerminalPanel {
           </h2>
           <p class="dock-meta" id="dock-meta"></p>
         </div>
+        <button type="button" class="button button-quiet" id="dock-defer" hidden></button>
         <button type="button" class="button button-quiet" id="dock-dismiss">${ICONS.leave}<span>${words.dismiss}</span></button>
         ${dockModeToggleHtml()}
         <button type="button" class="button button-icon" id="dock-close" aria-label="Close panel">${ICONS.close}</button>
@@ -67,6 +71,9 @@ export class TerminalPanel {
     this.note = this.dock.querySelector('#dock-note');
     this.dock.querySelector('#dock-close').addEventListener('click', this.onClose);
     this.#wireDismiss(this.dock.querySelector('#dock-dismiss'));
+    this.dock.querySelector('#dock-defer').addEventListener('click', () => {
+      if (this.session) this.onDefer(this.session.id, !this.session.deferred);
+    });
     this.#wireRename(this.dock.querySelector('#dock-rename'));
     this.tabs = new DockAgentTabs(this.dock.querySelector('#dock-tabs'), { onOpen: this.onSwitch });
     this.strip = new DockActivityStrip(this.dock.querySelector('#dock-activity'));
@@ -237,6 +244,14 @@ export class TerminalPanel {
     const meta = this.dock.querySelector('#dock-meta');
     meta.textContent = [tailOfPath(session.repo), session.profile].filter(Boolean).join(' · ');
     meta.title = session.repo;
+    // "Not now" while it waits before the ruler; "call it up" once it has gone back to its desk.
+    const defer = this.dock.querySelector('#dock-defer');
+    defer.hidden = !canDefer(session);
+    const label = session.deferred ? words.recallToRuler : words.deferAction;
+    if (defer.dataset.label !== label) {
+      defer.dataset.label = label;
+      defer.innerHTML = `${session.deferred ? ICONS.bell : ICONS.seat}<span>${escapeHtml(label)}</span>`;
+    }
   }
 
   close() {

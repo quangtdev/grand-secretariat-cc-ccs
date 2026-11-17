@@ -50,6 +50,7 @@ export class OverheadChips {
         this.sizesStale = true;
       }
       const status = statusOf(session);
+      const deferred = session.deferred ? session.status : ''; // sent back to its desk, still waiting
       const activity = activityText(session);
       const order = session.order || '';
       const question = session.question || '';
@@ -57,12 +58,15 @@ export class OverheadChips {
       const soldiers = String(troops.length);
       const roll = JSON.stringify(troops.map((s) => [s.task, s.kind, activityText(s)]));
       if (chip.dataset.status !== session.status || chip.dataset.ticket !== session.ticket || chip.dataset.activity !== activity
-        || chip.dataset.roll !== roll || chip.dataset.order !== order || chip.dataset.question !== question) {
+        || chip.dataset.roll !== roll || chip.dataset.order !== order || chip.dataset.question !== question
+        || (chip.dataset.deferred || '') !== deferred) {
         chip.dataset.question = question;
         this.sizesStale = true; // its text is about to change
         chip.dataset.order = order;
         chip.dataset.roll = roll;
-        chip.dataset.status = session.status;
+        // A deferred chip rests like an idle one (no petition ring, placed after the petitions).
+        chip.dataset.status = deferred ? 'idle' : session.status;
+        if (deferred) chip.dataset.deferred = deferred; else delete chip.dataset.deferred;
         chip.dataset.ticket = session.ticket;
         chip.dataset.activity = activity;
         chip.dataset.soldiers = soldiers;
@@ -79,13 +83,18 @@ export class OverheadChips {
           return `<span class="toast-soldier">${ICONS[words.helperIcon]}${kind}<b>${escapeHtml(name)}</b>${doing}</span>`;
         }).join('');
         const askLine = question ? `<span class="toast-question">${escapeHtml(question)}</span>` : '';
-        const toast = activity || troops.length || question ? `<span class="chip-toast">${orderLine}${stepLine}${askLine}${rollLines}</span>` : '';
+        // Deferred: a bubble with the world's own sign of the wait (scroll, sign, ticket ...); the
+        // question shows in it only while the chip is hovered or open.
+        const toast = deferred
+          ? `<span class="chip-toast chip-bubble" data-waiting="${deferred}">${ICONS[status.icon]}${askLine}</span>`
+          : activity || troops.length || question ? `<span class="chip-toast">${orderLine}${stepLine}${askLine}${rollLines}</span>` : '';
         // Sub-agents out on errands: a spear and their count.
         const band = soldiers !== '0' ? `<b class="chip-soldiers">${ICONS[words.helperIcon]}${soldiers}</b>` : '';
         const troop = soldiers !== '0' ? ` ${words.helpersOut(troops.length)}` : '';
         chip.innerHTML = `${toast}${ICONS[status.icon]}${band}<span>${escapeHtml(session.ticket)}</span>`;
         const asked = order ? ` Order: ${order}.` : '';
-        chip.setAttribute('aria-label', `${session.ticket}: ${question || activity || status.label}.${asked}${troop} Open terminal.`);
+        const parked = deferred ? ` ${words.deferredNote}.` : '';
+        chip.setAttribute('aria-label', `${session.ticket}: ${question || activity || status.label}.${parked}${asked}${troop} Open terminal.`);
       }
     }
   }

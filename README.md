@@ -15,7 +15,7 @@ Grand Secretariat is a local web app that runs your Claude Code agents and shows
 ## What you get
 
 - **One figure per agent.** Each scribe is a real `claude` session in its own terminal, held by the server. Click a figure, its name chip or its row in the rail to open its live terminal in the dock.
-- **Who needs you, at a glance.** A scribe that asks a question runs to the throne and kneels with a yellow petition, with the question on it. One that finished its turn stands there with a jade tablet. The browser tab counts how many are waiting.
+- **Who needs you, at a glance.** A scribe that asks a question runs to the throne and kneels with a yellow petition, with the question on it. One that finished its turn stands there with a jade tablet. The browser tab counts how many are waiting. Busy? Send it back to its desk from the dock: it sits there with a bubble over its head, still waiting, until you call it to the throne again.
 - **Summon with the drum.** Strike the drum pavilion, pick a repository (or any folder), name the ticket, give a first order. Start a new conversation, continue the last one, or resume an old one.
 - **Sub-agents are soldiers.** Every sub-agent a scribe sends out rises from a golden seal, stands in ranks behind its master and reports back with a bow.
 - **Ink level.** Each scribe shows how full its context is (`~62% ink`), read from its own transcript, plus its token count.

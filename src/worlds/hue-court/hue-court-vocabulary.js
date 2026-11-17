@@ -62,6 +62,9 @@ export const hueCourtVocabulary = {
   sessionEnded: 'This scribe has left the court. Its session ended.',
   dismiss: 'Dismiss',
   dismissConfirm: 'End this session?',
+  deferAction: 'Back to the desk', // send a waiting agent back to sit at its desk, still waiting (ui/deferred-petitions.js)
+  recallToRuler: 'Call to the throne', // and call it up again
+  deferredNote: 'Waiting at the desk', // shown beside it while it waits there
   helpersTitle: 'Soldiers (sub-agents) out on errands',
   inkWord: 'ink', // "~62% ink" in the rail and dock: context used by a scribe
   inkLowWord: 'ink low', // from 85%: the wording changes, never the colour

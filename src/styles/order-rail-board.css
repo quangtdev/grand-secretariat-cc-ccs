@@ -187,7 +187,7 @@
 
 /* The petition keeps calling: a glaze ring breathes round the docket until the chef answers. A
  * pseudo-element, so the focus outline still shows and scripted moves never cancel it. */
-.docket[data-status="asking"]:not([aria-current])::after {
+.docket[data-status="asking"]:not([aria-current]):not([data-deferred])::after {
   content: '';
   position: absolute;
   inset: -5px;
@@ -219,7 +219,7 @@
 .docket-slot:active { scale: 0.985; }
 
 @media (prefers-reduced-motion: reduce) {
-  .docket[data-status="asking"]:not([aria-current])::after { opacity: 1; }
+  .docket[data-status="asking"]:not([aria-current]):not([data-deferred])::after { opacity: 1; }
 }
 
 /* A narrow stage (the dock open on a small screen, or a phone): stations stack and the board scrolls. */

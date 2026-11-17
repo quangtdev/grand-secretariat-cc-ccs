@@ -290,6 +290,41 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .toast-soldier em { flex: none; font-style: normal; color: var(--glaze); }
 .toast-soldier-step { overflow: hidden; text-overflow: ellipsis; color: var(--ink-dim); font-family: "JetBrains Mono", monospace; font-size: 0.625rem; }
 /* Three still dots: an endless animation here kept the whole page compositing at 60 Hz. */
+/* A petition the user sent back to its desk: the chip rests, and a bubble over it carries the wait's
+   own icon and colour (glaze asks, jade reports), bobbing slowly. Hover or open shows the question. */
+.chip .chip-bubble {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem;
+  border-radius: 999px;
+  background: var(--glaze);
+  box-shadow: 0 3px 8px oklch(0.2 0.02 40 / 0.3);
+  color: var(--glaze-ink);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: normal;
+  animation: toast-in 260ms var(--ease-out), bubble-bob 3.2s ease-in-out 260ms infinite;
+}
+.chip .chip-bubble[data-waiting="done"] { background: var(--jade); color: var(--jade-ink); }
+.chip .chip-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  background: inherit;
+  transform: translateX(-50%) rotate(45deg);
+}
+.chip-bubble .icon { flex: none; width: 18px; height: 18px; }
+.chip-bubble .toast-question { display: none; }
+.chip:hover .chip-bubble, .chip.is-active .chip-bubble { padding: 0.25rem 0.5rem 0.25rem 0.375rem; border-radius: 0.5rem; background: var(--glaze-bright); }
+.chip:hover .chip-bubble[data-waiting="done"], .chip.is-active .chip-bubble[data-waiting="done"] { background: var(--jade); }
+.chip:hover .chip-bubble .toast-question, .chip.is-active .chip-bubble .toast-question { display: -webkit-box; }
+@keyframes bubble-bob { 50% { translate: -50% -3px; } }
+
 .toast-dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--glaze); }
 .toast-dots i:nth-child(2) { opacity: 0.7; }
 .toast-dots i:nth-child(3) { opacity: 0.4; }

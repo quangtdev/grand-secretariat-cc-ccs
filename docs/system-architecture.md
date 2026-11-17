@@ -138,6 +138,10 @@ UI colours: an inline script in `index.html` sets `<html data-world="<id>">` bef
 
 A pack with `kind: 'board'` (`BoardWorldPack`) draws no scene: it supplies `id`, `label`, `audio`, `vocabulary` and `board` (its own words). The only one is the order rail (`src/worlds/order-rail/`). Its driver lays every agent out as a docket in one of three stations: at the pass (asking, done, failed), on the line (working, starting), standing by (idle, plus the dashed "Fire a ticket" slot). `sync()` moves dockets only when someone arrives, leaves or changes station; `render()` patches text. A docket that changes station is flown by a clone over the whole board (the station lists scroll and would clip it), then swings from its clip. Reduced motion turns every move into a crossfade. `#court` and `.chips` are hidden; `styles/order-rail-board.css` styles the board.
 
+### Not now: a petition back at the desk
+
+The dock's "Back to the desk" button (`ui/deferred-petitions.js`) marks the open agent's current wait (asking or done) as deferred, per browser. `main.js` runs every feed through `withDeferrals()`: a deferred agent carries `deferred: true`, and `waitsAtThrone()` (status-vocabulary.js) is false for it, so the rail, the shortcuts, the tab title and the first-petition popup treat it as at its desk. The court driver stages it as `idle` (it sits, the king and the governor stop waiting); its chip shows a bubble instead of the petition ring. The board parks its docket on Standing by. A new status (`statusSince`) ends the deferral, so the next question brings the agent to the throne again.
+
 The user switches worlds from the globe button in the rail foot (`src/ui/world-picker.js`). A different choice is saved and the page reloads. `?world=` wins over the saved choice for one visit; if the browser refuses storage, the choice travels in the URL instead.
 
 ## Data flow

@@ -56,6 +56,9 @@ export const orderRailVocabulary = {
   sessionEnded: 'This cook has gone home. Its session ended.',
   dismiss: 'Send home',
   dismissConfirm: 'End this session?',
+  deferAction: 'Park the ticket', // send a waiting agent back to sit at its desk, still waiting (ui/deferred-petitions.js)
+  recallToRuler: 'Back to the pass', // and call it up again
+  deferredNote: 'Parked', // shown beside it while it waits there
   helpersTitle: 'Prep cooks (sub-agents) on the line',
   inkWord: 'context', // "~62% context": context used by a cook
   inkLowWord: 'context full', // from 85%: the wording changes, never the colour

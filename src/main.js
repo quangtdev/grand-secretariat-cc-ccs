@@ -8,7 +8,8 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import { subscribeToSessions } from './api-client.js';
 import { CourtAudio } from './audio/court-audio.js';
-import { statusOf, waitingFirst } from './status-vocabulary.js';
+import { waitingFirst, waitsAtThrone } from './status-vocabulary.js';
+import { setDeferred, withDeferrals } from './ui/deferred-petitions.js';
 import { attachShellLayoutControls } from './ui/collapsible-rail-and-resizable-dock.js';
 import { createFirstPetitionArrivalWatcher } from './ui/first-petition-arrival-watcher.js';
 import { attachDockPresentation } from './ui/dock-popup-or-docked-presentation.js';
@@ -37,7 +38,7 @@ setVocabulary(world.vocabulary); // before any UI is built: every label below re
 
 const $ = (id) => document.getElementById(id);
 const dock = $('dock');
-const state = { sessions: [], connected: true, refused: false, selectedId: null, selectedOrderedAt: 0, lastOpenedId: null, hoveredId: null, pendingOpenId: null };
+const state = { rawSessions: [], sessions: [], connected: true, refused: false, selectedId: null, selectedOrderedAt: 0, lastOpenedId: null, hoveredId: null, pendingOpenId: null };
 
 attachShellLayoutControls({
   shell: $('shell'), rail: document.querySelector('.rail'), dock,
@@ -89,7 +90,19 @@ function sendEdict(id) {
 // Power saver (rail foot): lower frame rates, no shadows, background life and the king's walks at rest.
 new PowerSaverToggle($('saver-controls'), (on) => stage.setPowerSaver(on));
 
-const terminalPanel = new TerminalPanel(dock, { onClose: closeDock, onSwitch: openTerminal, onTyping: dictate, onOrder: sendEdict });
+const terminalPanel = new TerminalPanel(dock, { onClose: closeDock, onSwitch: openTerminal, onTyping: dictate, onOrder: sendEdict, onDefer: deferPetition });
+
+/**
+ * "Not now": the open agent goes back to sit at its desk, still waiting, with a bubble over its
+ * head; or it is called up to the ruler again. The page re-reads the last feed at once.
+ */
+function deferPetition(id, on) {
+  const session = state.sessions.find((s) => s.id === id);
+  if (!session) return;
+  setDeferred(session, on);
+  if (on && dockPresentation.isPopup()) closeDock(); // the popup steps aside, like after an order
+  applyFeed(state.rawSessions);
+}
 const summonPanel = new SummonPanel(dock, {
   onClose: closeDock,
   // The new agent may not be in the feed yet; open its terminal as soon as it is.
@@ -187,7 +200,7 @@ attachDockShortcuts((action) => {
     else openTerminal((order.find((s) => s.id === state.lastOpenedId) || order[0]).id);
   } else if (action === 'waiting') {
     // The longest-waiting petition first, then anyone else before the throne.
-    const waiting = order.filter((s) => statusOf(s).atThrone && s.id !== state.selectedId);
+    const waiting = order.filter((s) => waitsAtThrone(s) && s.id !== state.selectedId);
     const next = waiting.find((s) => s.status === 'asking') || waiting[0];
     if (next) openTerminal(next.id);
   } else {
@@ -250,7 +263,10 @@ const SHELL_INTERVAL_MS = 200;
 let shellTimer = null;
 let shellRenderedAt = 0;
 
-subscribeToSessions((sessions) => {
+/** One feed from the server, as the page shows it (with the user's deferrals applied). */
+function applyFeed(raw) {
+  state.rawSessions = raw;
+  const sessions = withDeferrals(raw);
   state.sessions = sessions;
   audio.observe(sessions);
   stage.sync(sessions);
@@ -260,7 +276,9 @@ subscribeToSessions((sessions) => {
   const wait = SHELL_INTERVAL_MS - (performance.now() - shellRenderedAt);
   if (wait <= 0) { clearTimeout(shellTimer); renderShell(); }
   else shellTimer ??= setTimeout(renderShell, wait);
-}, (connected, refused = false) => {
+}
+
+subscribeToSessions(applyFeed, (connected, refused = false) => {
   if (connected === state.connected && refused === state.refused) return;
   state.connected = connected;
   state.refused = refused;
@@ -269,7 +287,7 @@ subscribeToSessions((sessions) => {
 
 /** The tab title carries the count of agents waiting, so it is visible from another tab. */
 function titleFor(sessions) {
-  const waiting = sessions.filter((s) => statusOf(s).atThrone).length;
+  const waiting = sessions.filter(waitsAtThrone).length;
   return waiting ? `(${waiting}) ${words.appName}` : words.appName;
 }
 
