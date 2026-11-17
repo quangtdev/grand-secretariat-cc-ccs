@@ -65,3 +65,20 @@
   --ink-dim: oklch(0.78 0.03 245);
   --mist: #9fb8d6;
 }
+
+/* Order rail (web board): a graphite steel rail and a cool neutral ink, a pale brushed-steel counter
+ * as the stage. Near-neutral hue 240 leaves glaze (82) and jade (165) as the only colour on the
+ * rail, so a waiting docket is the loudest thing on the screen. The board's own tokens (paper,
+ * steel, clip) live in styles/order-rail-board.css. */
+:root[data-world="order-rail"] {
+  --lacquer: oklch(0.3 0.012 240);
+  --lacquer-deep: oklch(0.24 0.012 240);
+  --lacquer-raise: oklch(0.37 0.014 240);
+  --bone-dim: oklch(0.84 0.01 240);
+  --ink: oklch(0.19 0.008 240);
+  --ink-raise: oklch(0.25 0.01 240);
+  --ink-line: oklch(0.35 0.012 240);
+  --ink-edge: oklch(0.56 0.014 240);
+  --ink-dim: oklch(0.77 0.012 240);
+  --mist: #dfe2e4;
+}

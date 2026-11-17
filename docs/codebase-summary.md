@@ -17,7 +17,7 @@ Last updated: 2026-11-14. Branch `feat/ink-annals-idle-scribes` (tip `a505ed6`, 
 | HTML entry (`index.html`) | 1 | 56 |
 | **Application code and tests** | **192** | **16,411** |
 
-Seven files exceed the 200-line guideline: `src/styles/court-shell.css` (360), `src/main.js` (355), `src/styles/court-dock.css` (294), `server/agent-session-store.js` (300), `src/ui/terminal-panel.js` (253), `src/scene/court-surroundings.js` (230) and `src/scene/desk-porter-crew.js` (227). Every new file on this branch is under 200. Every file under `src/worlds/` is under 200.
+Seven files exceed the 200-line guideline: `src/styles/court-shell.css` (360), `src/main.js` (277), `src/styles/court-dock.css` (294), `server/agent-session-store.js` (300), `src/ui/terminal-panel.js` (253), `src/scene/court-surroundings.js` (230) and `src/scene/desk-porter-crew.js` (227). Every new file on this branch is under 200. Every file under `src/worlds/` is under 200.
 
 ## Repository tree
 
@@ -71,7 +71,7 @@ Changed on this branch: `http-api-routes.js` (hook intake moved to `hook-event-i
 
 | File | Role | LOC |
 |---|---|---|
-| `main.js` | Composition root. Loads the chosen world (`loadWorld`), builds the scene, subscribes to the feed, owns `state` (selection, hover, pending open), opens and closes the dock, the Alt shortcuts, chip placement gating, the living court wiring, the power saver switch; `window.court` exposes `world`, `saver()`, `state`, `population`, `porters`, `legion`, `audio`, `king`, `edicts`, `camera`, `controls`, `cost()`, `THREE` | 355 |
+| `main.js` | Composition root. Loads the chosen world (`loadWorld`), imports its stage driver (court or board), subscribes to the feed, owns `state` (selection, hover, pending open), opens and closes the dock, the Alt shortcuts, the power saver switch; `window.court` exposes `world`, `state`, `audio`, `stage` and the driver's `debug` (court: `population`, `porters`, `legion`, `king`, `edicts`, `camera`, `controls`, `cost()`, `THREE`, `saver()`; board: `board`, `dockets`) | 277 |
 | `api-client.js` | `subscribeToSessions()` (EventSource), `fetchSummonOptions()`, `summonAgent()`, `dismissAgent()`, `fetchAppInfo()`, `runAppAction()`, `terminalSocketUrl()` | 45 |
 | `status-vocabulary.js` | `STATUS` table (label, icon, `atThrone`), `ICONS` (16-unit SVGs, including `world` and `leaf` for the rail foot), `statusOf()`, `waitingFirst()`, `formatElapsed()`, `escapeHtml()`, `tailOfPath()` | 94 |
 
@@ -86,6 +86,7 @@ A world is the look of one court: lights, buildings, costumes, figure bodies and
 | `zoo/*` (26 files, under 200 lines each) | The Zoo world: `zoo-world-pack.js` (environment, palette, bodies), `zoo-stage.js` (lawn, paths, fence, lookout hut on the dais, entrance arch and ticket booth as the summon target, duck pond, trees), ambient life with `settle` (ducks, butterflies, balloons, birds), animal bodies (`zoo-animal-body-factory.js` + three `zoo-species-*.js`, painted faces, sign and medal props, cubs) on the shared humanoid pose maths, keepers, feeding trough, thrown treat, synthesized audio (`zoo-instruments.js`, `zoo-audio-cues.js`, `zoo-ambience.js`) and vocabulary; ink gauge: a feed bucket whose grain sinks (`zoo-feed-bucket-gauge.js`) | 1,689 |
 | `office/*` (25 files, under 200 lines each) | The Modern office world: `office-world-pack.js` (environment without shadows, palette, bodies), `office-stage.js` (floor and glass window walls, the manager's glass corner office with east steps, reception desk and elevator doors as the summon target, coffee counter, lounge, water cooler, skyline and clouds), ambient life with `settle` through `office-ambient-gate.js` (clouds, swaying plants, fans, cooler bubbles, dust motes, notification pings), people from one builder (`office-person-parts.js`: employee with an own chair and held ticket and laptop, manager, contractor, movers) on the shared humanoid pose maths, desk with sticky notes, paper plane, synthesized audio (`office-instruments.js`, `office-audio-cues.js`, `office-ambience.js`) and vocabulary; ink gauge: a level strip on the desk (`office-context-gauge.js`) | 1,570 |
 | `space-station/*` (20 files, under 200 lines each) | The Space station world: `space-station-world-pack.js` (environment, palette, bodies), `space-station-stage.js` (deck, command bridge on the dais, teleporter pad as the summon target, star-map table, airlock, beacon), ambient life with `settle` (starfield dome and planet, floor light strips, status lights, shuttle, holo globe), crew bodies (`space-station-crew-body.js`) on the shared humanoid pose maths, captain, hover and cargo drones (own `animate`), console with holo panels, data packet, synthesized audio (`space-station-instruments.js`, `space-station-audio-cues.js`, `space-station-ambience.js`) and vocabulary; ink gauge: a fuel cell tube (`space-station-fuel-cell-gauge.js`) | 1,454 |
+| `order-rail/*` (2 files) | The Order rail board world (`kind: 'board'`): `order-rail-world-pack.js` (office instruments rescored: pass bell, ticket stamp) and `order-rail-vocabulary.js` (kitchen words + the board's station words) | 109 |
 | `world-vocabulary.js` | `words`: the shell's words for the active world, installed once by `main.js`; UI modules read its fields when they render | 19 |
 | `world-audio-and-vocabulary-contract.js` | What a pack supplies for sound (`audio`) and words (`vocabulary`, including the ink and annals words), and the dev-time check of both | 82 |
 | `hue-court/hue-court-audio.js` | The Huế court's sound in the pack's `audio` shape: instruments, hall reverb, one score per cue, background music, typing whisper | 62 |
@@ -108,11 +109,20 @@ A world is the look of one court: lights, buildings, costumes, figure bodies and
 | `hue-pixel/hue-pixel-desk-and-edict-sprites.js` | The desk and the flying edict as sprites; the desk sheet has a frame per pile height and ink-pot level (24 frames); the edict owns its geometry and disposes it when its flight ends | 81 |
 | `hue-pixel/hue-pixel-ambient.js` | Background life of the pixel court: egrets that circle and land on the roof ridges, petals, glints and koi, as one sprite batch (one mesh, one draw call) | 137 |
 
+## Board (`src/board/`)
+
+| File | Role | LOC |
+|---|---|---|
+| `order-rail-board.js` | `createOrderRailBoard()`: the board world's `StageDriver`; stations, docket placement and FLIP, focus kept on re-insert and handed on when a focused docket leaves, station heads (count, oldest wait) | 193 |
+| `order-rail-docket-card.js` | One docket: markup, in-place patching (status band, step, order, prep cooks, context gauge), the per-agent dye of its clip | 110 |
+| `order-rail-docket-motion.js` | WAAPI motion: station-to-station flight by a clone plus the landing swing, print, spike, step roll, order stamp; `still()` for reduced motion | 129 |
+
 ## Scene (`src/scene/`)
 
 | File | Role | LOC |
 |---|---|---|
 | `court-layout.js` | Shared stage plan: desks, throne, drum pavilion, petition spots, king seat, east stair and outings, lotus pond, bird perches; the palette and robe dyes | 132 |
+| `court-stage-driver.js` | `createCourtStageDriver({world, audio, handlers})`: the `StageDriver` of a scene world. Builds the court, figures, porters, soldiers, chips, the king and edicts; pointer picking; the frame loop and chip placement gating | 138 |
 | `court-scene.js` | `createCourtScene(canvas, stage, environment)`: renderer, the world's lights, fog and shadows, the camera from `court-camera-rig.js`, pixel ratio and `is-pixelated` for 2D worlds, `setPowerSaver()`, `start()` frame loop with real `dt`, `cost()` readout | 135 |
 | `court-camera-rig.js` | `createCameraRig()`: `perspective` (orbit, left pan, middle turn, right zoom) or `orthographic` with `view: 'isometric'` (yaw 45°, pitch 30°, pan and zoom only, frustum fits the whole yard at zoom 1 for any aspect); both keep the look-at point over the court | 138 |
 | `render-cost-governor.js` | `RenderCostGovernor`: frame-rate tiers (active 60, moving 30, ambient 20, petition 12, still 0: the loop sleeps), a world's own rates, the power saver table (`setSaver()`), `markActive()`, `markMoving()`, `setPetition()`, `sleepUntilNeeded()`, `frameDue()` (keeps only the lateness of a frame, so rates average out on any display), `shadowsDue()` | 167 |
@@ -195,7 +205,8 @@ The sounds and music are the Huế court's own. A new world reuses them (see [co
 |---|---|---|
 | `court-shell.css` | `:root` tokens, three-column shell, rail (19rem), roster rows with step line, chips, toast (ink material, petition question), petition animation, toast dots, sound toggles and rail-foot buttons, reduced-motion and 820 px rules | 360 |
 | `court-dock.css` | Dock: tab strip, header, activity strip (asking strip is glaze), form controls, segments, terminal well, the annals panel (`.annals-*`), 1100 px rule. The `.status-pill` rules are no longer used by the markup | 294 |
-| `world-themes.css` | Per-world shell colours: one block per world that sets its own rail and ink tokens over `court-shell.css`'s `:root`; the Huế worlds have none | 67 |
+| `world-themes.css` | Per-world shell colours: one block per world that sets its own rail and ink tokens over `court-shell.css`'s `:root`; the Huế worlds have none | 83 |
+| `order-rail-board.css` | The Order rail board: paper/steel tokens, stations with a graphite rail, dockets (clip, status band, tear line, gauge), the petition ring (`::after`), the ticket slot, stacking under a 44rem stage (container query) | 230 |
 
 Fonts are imported in `src/main.js` from `@fontsource` packages (Be Vietnam Pro 400, 500, 600; JetBrains Mono 400, 700).
 
@@ -218,6 +229,7 @@ Fonts are imported in `src/main.js` from `@fontsource` packages (Be Vietnam Pro 
 
 | File | Covers | LOC |
 |---|---|---|
+| `order-rail-board-world.test.js` | The board pack passes `assertWorldPack`; missing vocabulary, board words or an unknown `kind` are refused; `index.html`'s pre-paint id list matches `WORLDS` | 32 |
 | `ink-left-steps.test.js` | `inkLeftSteps()`: no reading is full, 100 - pct in 5 % steps, clamping, no churn within a step | 26 |
 | `ink-level-text.test.js` | `inkText()`, `inkDetail()`, `formatTokens()` | 30 |
 | `transcript-usage-parse.test.js` | Context and totals per message id, ignored lines, compaction, partial lines, the 1M latch and the env override | 60 |

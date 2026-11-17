@@ -98,5 +98,6 @@ Full specifications are in DESIGN.md, sections "Components" and "Do's and Don'ts
 | Sky, river, gate, banners | `src/scene/sky-dome-and-clouds.js`, `src/scene/river-water-and-sampan.js`, `src/scene/south-gate-and-banners.js` |
 | Throne hall details | `src/scene/throne-hall-details.js` |
 | Scene palette and layout | `src/scene/court-layout.js` |
+| Order rail board world (dockets, stations, motion) | `src/board/order-rail-board.js`, `src/board/order-rail-docket-card.js`, `src/board/order-rail-docket-motion.js`, `src/styles/order-rail-board.css` |
 | Frame rate tiers | `src/scene/render-cost-governor.js` |
 | Chip and toast placement | `src/ui/overhead-chips.js` |
