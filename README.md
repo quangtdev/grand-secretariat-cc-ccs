@@ -3,6 +3,14 @@
 A local web app that shows every running Claude Code agent as a figure in a court of Hue: the 3D court by default, or an isometric pixel-art court.
 Replaces "open a terminal, `cd` into the repo, type `claude`".
 
+<p align="center">
+  <a href="docs/media/grand-secretariat-promo-en.mp4">
+    <img src="docs/media/grand-secretariat-promo-en-poster.jpg" width="300" alt="Grand Secretariat promo video (35 s): AI agents at work in a royal court. Click to play.">
+  </a>
+  <br>
+  <sub><a href="docs/media/grand-secretariat-promo-en.mp4">▶ Watch the 35-second promo (English, with sound)</a></sub>
+</p>
+
 - Each figure is one agent session running in its own terminal (PTY) held by the server.
 - Click a figure, its name chip, or its roster row: the dock opens that agent's live prompt.
 - An agent that needs you runs to the throne and kneels with a yellow petition; one that finished its turn stands there with a jade tablet. The tab title shows how many are waiting. A restart of the server keeps them there: each agent resumes its conversation, and one that was before the throne comes back before the throne (with its question) until you give it a new order.
@@ -135,3 +143,4 @@ The server still listens on 127.0.0.1 only. tailscaled proxies the tailnet to it
 | [Deployment guide](docs/deployment-guide.md) | Local dev and production runs, environment variables, state folder |
 | [Design guidelines](docs/design-guidelines.md) | Summary of the design system; [DESIGN.md](DESIGN.md) is the source of truth |
 | [Project roadmap](docs/project-roadmap.md) | Done, known gaps, proposed next steps |
+| [`promo-video/`](promo-video/) | Kit that records the promo video: isolated server on port 4791 with fake agents (`start-server.sh`), `node record-promo-takes.js <vi\|en>`, `node encode-promo-video.js <vi\|en>` (run `npm install` there first) |
