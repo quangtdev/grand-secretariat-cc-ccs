@@ -24,7 +24,7 @@ Grand Secretariat is a local web app that runs your Claude Code agents and shows
 - **Survives restarts.** Stop the server and start it again: each scribe comes back in its place and resumes its conversation.
 - **Light on your machine.** The court redraws only as often as something moves, and goes still while you type. A power saver mode turns off the background life.
 
-## Five worlds
+## Six worlds
 
 Pick one from the globe button at the foot of the rail:
 
@@ -35,6 +35,7 @@ Pick one from the globe button at the foot of the rail:
 | **Zoo** | cartoon animals at their feeding troughs | cubs |
 | **Modern office** | employees at glass-walled desks | contractors with laptops |
 | **Space station** | crew at consoles above a planet | hover drones |
+| **Order rail** (web board, no 3D) | order dockets on a kitchen rail, in stations by what they need | prep cooks |
 
 ## Quick start
 

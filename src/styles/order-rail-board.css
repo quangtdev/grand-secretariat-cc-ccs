@@ -1,0 +1,230 @@
+/*
+ * The order rail board (world "order-rail"): the stage as three stations of order dockets on a
+ * brushed-steel counter, in place of the 3D court. Status colours keep their meaning (glaze asks,
+ * jade is an order up, bone with danger text failed); the docket's head band carries them.
+ * Motion lives in src/board/order-rail-docket-motion.js; hover uses the `translate`/`scale`
+ * properties so it never fights the scripted `transform`.
+ */
+:root[data-world="order-rail"] {
+  --paper: oklch(0.992 0.002 240);
+  --paper-ink: oklch(0.23 0.01 240);
+  --paper-dim: oklch(0.47 0.012 240); /* 7:1 on paper, 5.6:1 on the counter */
+  --paper-line: oklch(0.89 0.006 240);
+  --paper-raise: oklch(0.955 0.004 240);
+  --steel-lo: oklch(0.6 0.01 240);
+  --docket-shadow: 0 1px 2px oklch(0.2 0.01 240 / 0.14), 0 2px 6px oklch(0.2 0.01 240 / 0.08);
+  --docket-shadow-hover: 0 4px 10px oklch(0.2 0.01 240 / 0.14), 0 10px 24px oklch(0.2 0.01 240 / 0.1);
+}
+
+[data-world="order-rail"] #court,
+[data-world="order-rail"] .chips { display: none; }
+[data-world="order-rail"] .stage { container: stage / inline-size; }
+
+.board {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding: 1.25rem 1.25rem 0;
+  color: var(--paper-ink);
+  background: var(--mist);
+  scrollbar-color: oklch(0.45 0.01 240 / 0.4) transparent;
+}
+.board :focus-visible { outline: 2px solid var(--lacquer); outline-offset: 3px; }
+.board ::selection { background: var(--glaze); color: var(--glaze-ink); }
+
+/* A station: its head, the rail under it, then its dockets hanging from the rail and scrolling. */
+.station { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.station-head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0 0.375rem 1.375rem; /* the rail sits in the bottom 0.625rem, the first clip grips it */
+}
+.station-rail {
+  position: absolute;
+  inset: auto 0 0;
+  height: 0.625rem;
+  border-radius: 999px;
+  background: var(--lacquer); /* graphite steel, flat */
+}
+.station-name { display: flex; align-items: baseline; gap: 0.5rem; font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.station-count {
+  min-width: 1.5rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: oklch(0.3 0.01 240 / 0.09);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.station-head.has-waiting .station-count { background: var(--glaze); color: var(--glaze-ink); font-weight: 600; }
+.station-guide { margin-left: auto; color: var(--paper-dim); font-size: 0.75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.station-dockets {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  /* The first clip (0.4375rem above its docket) lands right under the rail; room below for the swing. */
+  padding: 0.5rem 0.375rem 2rem;
+}
+.station-empty { padding: 0.25rem 0.375rem; color: var(--paper-dim); font-size: 0.8125rem; }
+
+/* The docket: thermal paper on a steel clip. */
+.docket {
+  position: relative;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0.25rem 0.25rem 0.5rem 0.5rem;
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--docket-shadow);
+  text-align: left;
+  line-height: 1.4;
+  cursor: pointer;
+  transform-origin: 50% 0; /* swings from its clip */
+  transition: translate 180ms var(--ease-out), scale 120ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+.docket:hover, .docket.is-hovered { translate: 0 -2px; box-shadow: var(--docket-shadow-hover); }
+.docket:active { translate: 0 0; scale: 0.985; }
+.docket[aria-current] { outline: 3px solid var(--glaze); outline-offset: 3px; box-shadow: var(--docket-shadow-hover); }
+.docket-clip {
+  position: absolute;
+  top: -0.4375rem;
+  left: 0.875rem;
+  width: 2.25rem;
+  height: 0.8125rem;
+  border-radius: 3px 3px 2px 2px;
+  /* Flat steel, with the cook's own colour as its lower lip: identity, never status. */
+  background: linear-gradient(to bottom, var(--steel-lo) 62%, var(--dye, var(--steel-lo)) 62%);
+}
+
+/* Head band: the status, printed. */
+.docket-band {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.6875rem 0.75rem 0.4375rem;
+  border-radius: 0.25rem 0.25rem 0 0;
+  background: var(--paper-raise);
+  color: var(--paper-dim);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: background-color 240ms var(--ease-out), color 240ms var(--ease-out);
+}
+.docket-icon { display: inline-flex; }
+.docket-time { margin-left: auto; font-variant-numeric: tabular-nums; }
+.docket[data-status="working"] .docket-band,
+.docket[data-status="starting"] .docket-band { background: var(--lacquer); color: var(--bone); }
+.docket[data-status="asking"] .docket-band { background: var(--glaze); color: var(--glaze-ink); font-weight: 600; }
+.docket[data-status="done"] .docket-band { background: var(--jade); color: var(--jade-ink); }
+.docket[data-status="exited"] .docket-band { background: var(--bone); color: oklch(0.45 0.16 28); font-weight: 600; box-shadow: inset 0 -2px 0 var(--danger); }
+
+/* Body, under a perforated tear line the colour of the counter. */
+.docket-body {
+  display: grid;
+  gap: 0.125rem;
+  padding: 0.75rem 0.75rem 0.75rem;
+  background: radial-gradient(circle, var(--mist) 1.4px, transparent 1.6px) 0 -2px / 7px 4px repeat-x;
+}
+.docket-ticket { font-size: 1rem; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.docket-repo { color: var(--paper-dim); font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.docket-step { display: block; margin-top: 0.375rem; overflow: hidden; font-size: 0.8125rem; }
+.docket-step-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; }
+.docket[data-status="asking"] .docket-step-text { -webkit-line-clamp: 5; font-weight: 500; }
+.docket-order {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 0.25rem;
+  color: var(--paper-dim);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+.docket-order-label { color: var(--paper-ink); font-weight: 600; }
+.docket-preps { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.5rem; }
+.prep {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  padding: 0.125rem 0.5rem 0.125rem 0.375rem;
+  border-radius: 999px;
+  background: var(--paper-raise);
+  box-shadow: inset 0 0 0 1px var(--paper-line);
+  font-size: 0.75rem;
+}
+.prep .icon { width: 12px; height: 12px; }
+.prep-text { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.prep.is-fresh { animation: prep-in 420ms var(--ease-out); }
+@keyframes prep-in { from { opacity: 0; transform: translateY(-4px) scale(0.92); } }
+
+.docket-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem 0.6875rem;
+  color: var(--paper-dim);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+.docket-gauge { flex: 1; height: 0.25rem; border-radius: 999px; background: var(--paper-line); overflow: hidden; }
+.docket-gauge-fill { display: block; height: 100%; background: var(--steel-lo); transform-origin: 0 50%; transform: scaleX(0); transition: transform 600ms var(--ease-out); }
+.docket-foot.is-full .docket-gauge-fill { background: var(--paper-ink); } /* still neutral: only the wording says "full" */
+
+/* The petition keeps calling: a glaze ring breathes round the docket until the chef answers. A
+ * pseudo-element, so the focus outline still shows and scripted moves never cancel it. */
+.docket[data-status="asking"]:not([aria-current])::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 0.5rem 0.5rem 0.75rem 0.75rem;
+  box-shadow: 0 0 0 2px var(--glaze);
+  opacity: 0;
+  pointer-events: none;
+  animation: docket-call 2.4s ease-in-out infinite;
+}
+@keyframes docket-call { 50% { opacity: 1; } }
+
+/* The empty ticket slot ends the idle station. */
+.docket-slot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  border: 1.5px dashed var(--steel-lo);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--paper-dim);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), border-color 160ms var(--ease-out), scale 120ms var(--ease-out);
+}
+.docket-slot:hover { background: oklch(1 0 0 / 0.55); border-color: var(--paper-ink); color: var(--paper-ink); }
+.docket-slot:active { scale: 0.985; }
+
+@media (prefers-reduced-motion: reduce) {
+  .docket[data-status="asking"]:not([aria-current])::after { opacity: 1; }
+}
+
+/* A narrow stage (the dock open on a small screen, or a phone): stations stack and the board scrolls. */
+@container stage (max-width: 44rem) {
+  .board { grid-template-columns: minmax(0, 1fr); grid-auto-rows: max-content; align-content: start; overflow-y: auto; gap: 0.5rem; padding: 1rem 1rem 0; }
+  .station-dockets { overflow: visible; flex: none; padding-bottom: 1rem; }
+  .station:last-child { padding-bottom: 2rem; }
+}

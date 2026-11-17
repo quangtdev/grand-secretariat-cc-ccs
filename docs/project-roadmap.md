@@ -66,6 +66,11 @@ Verified in source at `a505ed6`. Tokens only, no cost figures: the ccs profiles 
 - **Tests:** `npm test` runs `node --test` over six files for the pure helpers (`test/`).
 - **Dropped:** idle retirement (P24). The user dismisses long-waiting scribes by hand.
 
+## Done on `feat/plain-web-ui-world`
+
+- **Order rail world:** a sixth world that is a plain web board, no 3D (`src/board/`, `src/worlds/order-rail/`). Dockets in three stations (at the pass, on the line, standing by); a docket that changes station flies there and swings from its clip; new ones print in, dismissed ones are spiked; the petition ring breathes until answered.
+- **Stage drivers:** `main.js` no longer builds the court itself. It loads a `StageDriver` (`scene/court-stage-driver.js` or the board), so a world can replace the stage entirely. `main.js` went from 355 to 277 lines.
+
 ## Deviations from the plan
 
 Decided during the build, or not built. None blocks use.
@@ -105,7 +110,7 @@ Decided during the build, or not built. None blocks use.
 
 | Gap | Detail |
 |---|---|
-| Seven files over 200 lines | `src/styles/court-shell.css` (360), `src/main.js` (355), `server/agent-session-store.js` (300), `src/ui/terminal-panel.js` (253), `src/styles/court-dock.css` (294), `src/scene/court-surroundings.js` (230), `src/scene/desk-porter-crew.js` (227). The new files on the ink branch are all under 200 |
+| Seven files over 200 lines | `src/styles/court-shell.css` (360), `src/main.js` (277), `server/agent-session-store.js` (300), `src/ui/terminal-panel.js` (253), `src/styles/court-dock.css` (294), `src/scene/court-surroundings.js` (230), `src/scene/desk-porter-crew.js` (227). The new files on the ink branch are all under 200 |
 | Looping toast dots | `toast-dot` loops forever while an agent works (1.1 s, infinite). DESIGN.md allows one loop that calls for attention (the petition); the toast dots are not that. Also the toast text is 0.6875rem, below the type ramp |
 | Dead status-pill CSS | `.status-pill` rules remain in `src/styles/court-dock.css`; the markup no longer uses them |
 | Debug global | `window.court` exposes internal state (`src/main.js`). Intended for development only |

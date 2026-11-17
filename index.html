@@ -10,7 +10,7 @@
     // (styles/world-themes.css) never flash the Huế ones. Same choice as worlds/world-registry.js
     // (?world= wins, then the remembered one; unknown ids mean the default): keep these ids in sync with WORLDS there.
     (function () {
-      var ids = ['hue-court', 'hue-pixel', 'zoo', 'office', 'space-station'], id = new URLSearchParams(location.search).get('world');
+      var ids = ['hue-court', 'hue-pixel', 'zoo', 'office', 'space-station', 'order-rail'], id = new URLSearchParams(location.search).get('world');
       if (ids.indexOf(id) < 0) { try { id = localStorage.getItem('grand-secretariat:world'); } catch (e) { id = null; } }
       document.documentElement.dataset.world = ids.indexOf(id) < 0 ? 'hue-court' : id;
     })();
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/src/styles/court-shell.css">
   <link rel="stylesheet" href="/src/styles/court-dock.css">
   <link rel="stylesheet" href="/src/styles/world-themes.css">
+  <link rel="stylesheet" href="/src/styles/order-rail-board.css">
 </head>
 <body>
   <div class="shell" id="shell">

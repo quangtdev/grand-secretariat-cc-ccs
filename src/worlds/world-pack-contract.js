@@ -140,7 +140,36 @@ import { checkAudioAndVocabulary } from './world-audio-and-vocabulary-contract.j
  */
 
 /**
+ * What main.js drives, whatever draws the stage: the court (scene/court-stage-driver.js) or a
+ * DOM board (board/order-rail-board.js). main.js owns the dock, the rail and the feed; the driver
+ * owns the stage and its pointer.
+ * @typedef {object} StageDriver
+ * @property {(sessions: object[]) => void} sync      every feed, at once (figures move, cards fly)
+ * @property {(sessions: object[]) => void} render    the throttled shell render (text that changes often)
+ * @property {(ids: string[], selectedId: string|null) => void} highlight  hovered and selected agents
+ * @property {() => void} hovered                     the hovered agent changed
+ * @property {(id: string) => void} focus             its terminal opened: bring it into view
+ * @property {() => void} release                     nothing is open any more
+ * @property {(on: boolean) => void} setPowerSaver
+ * @property {() => void} dictate                     the user types an order in the dock
+ * @property {(id: string) => void} edict             an order was sent to this agent
+ * @property {object} debug                           exposed on window.court
+ */
+
+/**
+ * A board world (kind 'board') draws no scene: it brings only words, sound and its driver.
+ * @typedef {object} BoardWorldPack
+ * @property {'board'} kind
+ * @property {string} id
+ * @property {string} label
+ * @property {import('./world-audio-and-vocabulary-contract.js').WorldAudio} audio
+ * @property {import('./world-audio-and-vocabulary-contract.js').WorldVocabulary} vocabulary
+ * @property {Record<string, string>} board  the board's own words: station names, their empty notes, 'oldest', 'order' (BOARD_WORDS)
+ */
+
+/**
  * @typedef {object} WorldPack
+ * @property {'scene'} [kind]  default; 'board' packs follow BoardWorldPack instead
  * @property {string} id
  * @property {string} label
  * @property {WorldEnvironment} environment
@@ -153,6 +182,8 @@ import { checkAudioAndVocabulary } from './world-audio-and-vocabulary-contract.j
  * @property {number} [petitionSpacing]  world units between neighbouring petitioners (default 1.3, see petitionSpot)
  */
 
+// The board's own words (board/order-rail-board.js reads each one).
+const BOARD_WORDS = ['stationPass', 'stationLine', 'stationReady', 'passEmpty', 'lineEmpty', 'readyEmpty', 'oldest', 'order'];
 const BODY_FACTORIES = ['agent', 'ruler', 'helper', 'porter', 'workplace', 'edictProjectile'];
 const PALETTE_KEYS = ['ring', 'pool', 'portalSummon', 'portalDismiss', 'edictTrail'];
 const LIGHTS = ['hemi', 'sun', 'rim'];
@@ -165,6 +196,13 @@ export function assertWorldPack(pack) {
   if (pack && typeof pack === 'object') {
     need(typeof pack.id === 'string' && pack.id, 'id');
     need(typeof pack.label === 'string' && pack.label, 'label');
+    need(pack.kind === undefined || pack.kind === 'scene' || pack.kind === 'board', `kind (unknown "${pack.kind}")`);
+    if (pack.kind === 'board') {
+      checkAudioAndVocabulary(pack, need); // a board draws no scene: no environment, palette or bodies
+      for (const key of BOARD_WORDS) need(typeof pack.board?.[key] === 'string' && pack.board[key], `board.${key}`);
+      if (problems.length) throw new Error(`World pack "${pack.id ?? '?'}" is incomplete: ${problems.join(', ')}`);
+      return pack;
+    }
     const env = pack.environment;
     need(env && typeof env === 'object', 'environment');
     if (env) {

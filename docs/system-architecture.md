@@ -80,7 +80,9 @@ flowchart LR
 | `src/ui/court-annals-panel.js` | Dock view of the annals: one day, grouped by scribe, day arrows | 81 |
 | `server/terminal-websocket-bridge.js` | `/ws/term/<id>` upgrade, I/O between socket and PTY | 48 |
 | `server/repository-scanner.js` | Finds git repositories (4 levels deep, 30 s cache) | 51 |
-| `src/main.js` | Composition root: loads the chosen world, wires the feed to the scene, chips, roster, dock, audio, the power saver and the living court; the Alt shortcuts; the frame loop | 355 |
+| `src/main.js` | Composition root: loads the chosen world, picks its stage driver, wires the feed to the stage, roster, dock, audio and the power saver; the Alt shortcuts | 277 |
+| `src/scene/court-stage-driver.js` | Stage driver of a scene world: builds the court, figures, chips, the strolling ruler and edicts, pointer picking and the frame loop | 138 |
+| `src/board/order-rail-board.js`, `order-rail-docket-card.js`, `order-rail-docket-motion.js` | Stage driver of the board world: three stations of dockets, kept per agent; docket markup; WAAPI motion (flight + swing, print, spike, step roll, stamp) | 193, 110, 129 |
 | `src/worlds/world-registry.js`, `src/worlds/world-pack-contract.js` | Which worlds exist, the saved and URL choice, lazy loading; what a world must supply, and the dev check | 73, 188 |
 | `src/worlds/<id>/` | One folder per world: its stage, costumes, sprites and background life. See the [codebase summary](./codebase-summary.md#worlds-srcworlds) | see codebase summary |
 | `src/ui/terminal-panel.js` | Dock: tabs, header, activity strip, terminal; detects typing and submitted orders | 253 |
@@ -126,11 +128,15 @@ Positions (desks, throne, petition spots, paths, the drum pavilion) come from `s
 1. `selectedWorldId()` reads `?world=<id>`, then the saved choice (`grand-secretariat:world` in `localStorage`), then the default `hue-court`. Unknown ids fall back to the default.
 2. `loadWorld(id)` imports the chunk. If the import fails, a non-default world is logged, its saved choice is forgotten and the default loads in place. If the default fails, boot stops.
 3. In dev only (`import.meta.env.DEV`), `assertWorldPack()` throws one error naming every missing or mistyped member.
-4. `createCourtScene()` builds the renderer and camera. `buildStage()` runs and `assertWorldStage()` checks its result. Each body factory is called once and disposed, so a broken body fails at boot, not at the first agent.
+4. `main.js` imports the world's stage driver (`StageDriver` in `world-pack-contract.js`): `board/order-rail-board.js` for a pack with `kind: 'board'`, else `scene/court-stage-driver.js`. Each is its own chunk, so a board world never loads three.js. The court driver: `createCourtScene()` builds the renderer and camera. `buildStage()` runs and `assertWorldStage()` checks its result. Each body factory is called once and disposed, so a broken body fails at boot, not at the first agent.
 5. If step 4 throws, a non-default world is logged, forgotten, and the page reloads into the default (`resetToDefaultWorld()`, which also drops `?world=`). A failing default world stops boot.
 6. `setVocabulary(world.vocabulary)` installs the words, and `applyVocabularyToPage()` replaces the static text of `index.html` (title, rail and stage labels, the stage hint chosen by camera type). `index.html` keeps the Huế text as its pre-boot default. `CourtAudio` is built from `world.audio`.
 
 UI colours: an inline script in `index.html` sets `<html data-world="<id>">` before first paint (same `?world=` and saved choice as the registry; its short id list must match `WORLDS`). `src/styles/world-themes.css` holds one `:root[data-world=...]` block per world that overrides existing tokens; the Huế worlds have none. Status colours (glaze yellow = asks, jade green = done, danger red) never change between worlds.
+
+### Board worlds
+
+A pack with `kind: 'board'` (`BoardWorldPack`) draws no scene: it supplies `id`, `label`, `audio`, `vocabulary` and `board` (its own words). The only one is the order rail (`src/worlds/order-rail/`). Its driver lays every agent out as a docket in one of three stations: at the pass (asking, done, failed), on the line (working, starting), standing by (idle, plus the dashed "Fire a ticket" slot). `sync()` moves dockets only when someone arrives, leaves or changes station; `render()` patches text. A docket that changes station is flown by a clone over the whole board (the station lists scroll and would clip it), then swings from its clip. Reduced motion turns every move into a crossfade. `#court` and `.chips` are hidden; `styles/order-rail-board.css` styles the board.
 
 The user switches worlds from the globe button in the rail foot (`src/ui/world-picker.js`). A different choice is saved and the page reloads. `?world=` wins over the saved choice for one visit; if the browser refuses storage, the choice travels in the URL instead.
 

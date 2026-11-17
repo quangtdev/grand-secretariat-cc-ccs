@@ -34,6 +34,12 @@ export const WORLDS = [
     description: 'A command bridge above a planet in 3D: every agent is a crew member at a console, with a captain on the bridge.',
     load: () => import('./space-station/space-station-world-pack.js'),
   },
+  {
+    id: 'order-rail',
+    label: 'Order rail (web board)',
+    description: 'A plain web board, no 3D: every agent is an order docket on a kitchen rail, sorted into stations by what it needs.',
+    load: () => import('./order-rail/order-rail-world-pack.js'),
+  },
 ];
 
 export const DEFAULT_WORLD = 'hue-court';
