@@ -20,7 +20,7 @@ const repoPath = (name) => path.join(ROOT, 'repos', name);
 async function launch() {
   return puppeteer.launch({
     executablePath: CHROME, headless: true,
-    args: ['--no-sandbox', '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=gl',
+    args: ['--no-sandbox', '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=gl-egl',
       '--autoplay-policy=no-user-gesture-required', '--hide-scrollbars', '--disable-background-timer-throttling', '--disable-renderer-backgrounding',
       '--force-device-scale-factor=2', '--window-size=540,1047'], // 87px of window chrome: the page itself is 540x960 CSS px, 1080x1920 real
     defaultViewport: null,
