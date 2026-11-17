@@ -11,8 +11,8 @@
     "update": "bash scripts/update-app.sh"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "quangtdev",
+  "license": "MIT",
   "type": "module",
   "private": true,
   "dependencies": {
