@@ -75,8 +75,13 @@ export function createCourtStageDriver({ world, audio, handlers }) {
   });
 
   return {
-    /** Every feed: figures, the king and soldiers follow the sessions at once. */
-    sync(sessions) {
+    /**
+     * Every feed: figures, the king and soldiers follow the sessions at once. An agent the user
+     * sent back to its desk (`deferred`) is staged as idle: it sits at its desk and the ruler and
+     * the court do not wait on it; only its chip's bubble says it still waits.
+     */
+    sync(feed) {
+      const sessions = feed.map((s) => (s.deferred ? { ...s, status: 'idle' } : s));
       population.sync(sessions);
       king.observe(sessions);
       const petition = sessions.some((s) => s.status === 'asking');

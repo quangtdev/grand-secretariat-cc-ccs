@@ -2,7 +2,7 @@
 import { words, counted } from '../worlds/world-vocabulary.js';
 import { activityText } from './activity-text.js';
 import { inkText, inkDetail } from './ink-level-text.js';
-import { ICONS, escapeHtml, formatElapsed, statusOf, waitingFirst } from '../status-vocabulary.js';
+import { ICONS, escapeHtml, formatElapsed, statusOf, waitingFirst, waitsAtThrone } from '../status-vocabulary.js';
 
 export class RosterRail {
   constructor({ tally, roster, summonButton, historyButton, annalsButton }, { onOpen, onSummon, onHistory, onAnnals, onHover }) {
@@ -46,8 +46,8 @@ export class RosterRail {
 
   render() {
     const ordered = waitingFirst(this.sessions);
-    const waiting = ordered.filter((s) => statusOf(s).atThrone);
-    const atDesks = ordered.filter((s) => !statusOf(s).atThrone);
+    const waiting = ordered.filter(waitsAtThrone);
+    const atDesks = ordered.filter((s) => !waitsAtThrone(s));
 
     if (this.connected === 'refused') {
       this.tally.textContent = 'The server refused this page. Reload it.';
@@ -81,6 +81,7 @@ export class RosterRail {
       if (s.status === 'working') step = activityText(s) || 'Thinking';
       else if (status.atThrone) step = s.question || status.label;
       else meta = `${escapeHtml(status.label)} · ${meta}`;
+      if (s.deferred) meta = `${escapeHtml(words.deferredNote)} · ${meta}`; // sent back to its desk, still waiting
       const ink = inkText(s.ink, words);
       if (ink) meta += ` · ${escapeHtml(ink)}`;
       const hint = [s.order && `Order: ${s.order}`, step, s.repo, inkDetail(s.ink, words)].filter(Boolean).join('\n');

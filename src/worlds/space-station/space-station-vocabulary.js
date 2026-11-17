@@ -56,6 +56,9 @@ export const spaceStationVocabulary = {
   sessionEnded: 'This crew member has left the station. Its session ended.',
   dismiss: 'Stand down',
   dismissConfirm: 'End this session?',
+  deferAction: 'Back to the console', // send a waiting agent back to sit at its desk, still waiting (ui/deferred-petitions.js)
+  recallToRuler: 'Call to the bridge', // and call it up again
+  deferredNote: 'Waiting at the console', // shown beside it while it waits there
   helpersTitle: 'Drones (sub-agents) out on tasks',
   inkWord: 'fuel', // "~62% fuel" in the rail and dock: context used by a scribe
   inkLowWord: 'fuel spent', // from 85%: the wording changes, never the colour

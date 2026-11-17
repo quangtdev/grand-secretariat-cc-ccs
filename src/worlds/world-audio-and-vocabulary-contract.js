@@ -45,6 +45,7 @@ import { ICONS } from '../status-vocabulary.js';
  * @property {string} recall @property {string} recalling
  * @property {string} tabsLabel @property {string} shortcutHint @property {string} renameTitle @property {string} renameLabel
  * @property {string} sessionEnded @property {string} dismiss @property {string} dismissConfirm
+ * @property {string} deferAction @property {string} recallToRuler @property {string} deferredNote  "not now": a waiting agent back to its desk, called up again, and the note while it waits there
  * @property {string} helpersTitle @property {string} helperFallback @property {(count: number) => string} helpersOut
  * @property {(task: string) => string} delegating  the step "sending a helper off with this task" (the server sends `activityKind: 'delegate'` + `activityTask`)
  * @property {string} inkWord @property {string} inkLowWord @property {string} inkLabel  context used: "~62% ink", "~91% ink low" (from 85%), tooltip lead "Ink ~128k of 200k used"
@@ -57,7 +58,7 @@ const STATUS_NAMES = ['starting', 'idle', 'working', 'asking', 'done', 'exited']
 const VOCAB_TEXT = ['appName', 'helperIcon', 'railLabel', 'stageLabel', 'hintFlat', 'hintOrbit', 'railHide', 'railShow', 'tallyEmpty',
   'groupWaiting', 'groupWorking', 'rosterEmpty', 'summonAction', 'summonLead', 'summonSubmit', 'summonBusy', 'ticketHint',
   'historyTitle', 'historyLead', 'historyEmpty', 'historyLeft', 'recall', 'recalling', 'tabsLabel', 'shortcutHint', 'renameTitle',
-  'renameLabel', 'sessionEnded', 'dismiss', 'dismissConfirm', 'helpersTitle', 'helperFallback', 'inkWord', 'inkLowWord', 'inkLabel', 'annalsTitle', 'annalsTip', 'annalsLead', 'annalsEmpty', 'saverOn', 'restartNote'];
+  'renameLabel', 'sessionEnded', 'dismiss', 'dismissConfirm', 'deferAction', 'recallToRuler', 'deferredNote', 'helpersTitle', 'helperFallback', 'inkWord', 'inkLowWord', 'inkLabel', 'annalsTitle', 'annalsTip', 'annalsLead', 'annalsEmpty', 'saverOn', 'restartNote'];
 const VOCAB_FUNCTIONS = ['tally', 'summonFailed', 'helpersOut', 'restartWarn', 'delegating'];
 
 /** Adds to `need` (the caller's problem collector) one entry per missing audio or vocabulary member. */

@@ -56,6 +56,9 @@ export const officeVocabulary = {
   sessionEnded: 'This employee has left the office. Its session ended.',
   dismiss: 'Let go',
   dismissConfirm: 'End this session?',
+  deferAction: 'Back to the desk', // send a waiting agent back to sit at its desk, still waiting (ui/deferred-petitions.js)
+  recallToRuler: 'Call to my office', // and call it up again
+  deferredNote: 'Waiting at the desk', // shown beside it while it waits there
   helpersTitle: 'Contractors (sub-agents) on site',
   inkWord: 'context', // "~62% context" in the rail and dock: context used by a scribe
   inkLowWord: 'context full', // from 85%: the wording changes, never the colour

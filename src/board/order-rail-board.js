@@ -5,13 +5,15 @@
 // so the motion layer can fly them (order-rail-docket-motion.js).
 import { words } from '../worlds/world-vocabulary.js';
 import { applyVocabularyToPage } from '../ui/apply-vocabulary-to-page.js';
-import { ICONS, escapeHtml, formatElapsed, statusOf, waitingFirst } from '../status-vocabulary.js';
+import { ICONS, escapeHtml, formatElapsed, waitingFirst, waitsAtThrone } from '../status-vocabulary.js';
 import { createDocket, patchDocket } from './order-rail-docket-card.js';
 import { glide, measure, print, rollStep, spike, stamp, still } from './order-rail-docket-motion.js';
 
+// A docket the user parked (sent back to its desk, `deferred`) waits on Standing by, still printed
+// with its status, until it is called back to the pass.
 const stationOf = (session) => {
-  if (statusOf(session).atThrone) return 'pass';
-  return session.status === 'idle' ? 'ready' : 'line';
+  if (waitsAtThrone(session)) return 'pass';
+  return session.status === 'idle' || session.deferred ? 'ready' : 'line';
 };
 
 /**
@@ -128,7 +130,7 @@ export function createOrderRailBoard({ world, handlers }) {
       const group = order[station.id];
       const head = board.querySelector(`[data-station="${station.id}"] .station-head`);
       head.querySelector('.station-count').textContent = group.length;
-      head.classList.toggle('has-waiting', group.some((s) => s.status === 'asking')); // glaze only when someone asks
+      head.classList.toggle('has-waiting', group.some((s) => s.status === 'asking' && !s.deferred)); // glaze only when someone asks
       const oldest = group.length ? Math.min(...group.map((s) => s.statusSince)) : 0;
       head.querySelector('.station-guide').textContent = group.length ? `${boardWords.oldest} ${formatElapsed(oldest)}` : '';
     }

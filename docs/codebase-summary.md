@@ -192,6 +192,7 @@ The sounds and music are the Huế court's own. A new world reuses them (see [co
 | `terminal-touch-scroll.js` | `enableTerminalTouchScroll(host, term)`: xterm.js 6 has no touch scrolling, so a one-finger vertical drag on the terminal host becomes `term.scrollLines()` (normal buffer, no mouse tracking) or a wheel event xterm reports to a full-screen program; a flick glides. Returns its own remover; a sideways drag is left to the browser (pans a zoomed-in page); `.terminal-host` has `touch-action: pan-x pinch-zoom` |
 | `collapsible-rail-and-resizable-dock.js` | Shell layout controls: hide and show the rail; drag the dock's left edge to resize it (remembered in `localStorage`) | 96 |
 | `history-panel.js` | `HistoryPanel`: dock list of dismissed agents with Recall and Forget | 95 |
+| `deferred-petitions.js` | "Not now": waiting agents (asking, done) the user sent back to their desk. Per-browser keys `id:status:statusSince`, so a deferral lasts one wait; `withDeferrals()` marks the feed with `deferred: true` (then `waitsAtThrone()` is false), `setDeferred()`, `canDefer()` | 46 |
 | `court-annals-panel.js` | `CourtAnnalsPanel`: dock view of one day of the annals, grouped by scribe (dismissed ones included); day arrows; each day is fetched when shown, reopen the panel to refresh | 81 |
 | `court-annals-text.js` | Pure. `annalsCounts()` ("3 orders · 12 files · 2 commits · waited 1h 05m · 1.4M tokens"), `formatWaited()`, `clockTime()`, `dayLabel()` ("Today · Sat 14 Nov") | 40 |
 | `ink-level-text.js` | Pure. `inkText()` ("~62% ink", the low wording from 85%, never a colour), `inkDetail()` (the tooltip) and `formatTokens()` (950, 12k, 1.4M) | 30 |
@@ -229,6 +230,7 @@ Fonts are imported in `src/main.js` from `@fontsource` packages (Be Vietnam Pro 
 
 | File | Covers | LOC |
 |---|---|---|
+| `deferred-petitions.test.js` | Only asking/done can be deferred; a deferral lasts one wait; calling up again restores the throne | 33 |
 | `order-rail-board-world.test.js` | The board pack passes `assertWorldPack`; missing vocabulary, board words or an unknown `kind` are refused; `index.html`'s pre-paint id list matches `WORLDS` | 32 |
 | `ink-left-steps.test.js` | `inkLeftSteps()`: no reading is full, 100 - pct in 5 % steps, clamping, no churn within a step | 26 |
 | `ink-level-text.test.js` | `inkText()`, `inkDetail()`, `formatTokens()` | 30 |

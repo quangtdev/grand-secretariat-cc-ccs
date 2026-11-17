@@ -56,6 +56,9 @@ export const zooVocabulary = {
   sessionEnded: 'This animal has left the zoo. Its session ended.',
   dismiss: 'Release',
   dismissConfirm: 'End this session?',
+  deferAction: 'Back to the trough', // send a waiting agent back to sit at its desk, still waiting (ui/deferred-petitions.js)
+  recallToRuler: 'Call to the keeper', // and call it up again
+  deferredNote: 'Waiting at the trough', // shown beside it while it waits there
   helpersTitle: 'Cubs (sub-agents) out playing',
   inkWord: 'appetite', // "~62% appetite" in the rail and dock: context used by a scribe
   inkLowWord: 'appetite full', // from 85%: the wording changes, never the colour

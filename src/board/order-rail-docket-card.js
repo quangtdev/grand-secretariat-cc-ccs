@@ -62,7 +62,8 @@ export function patchDocket(docket, session, boardWords) {
     docket.dataset.status = session.status;
     part(docket, 'icon').innerHTML = ICONS[status.icon];
   }
-  setText(part(docket, 'status'), status.label);
+  if (session.deferred) docket.dataset.deferred = 'true'; else delete docket.dataset.deferred;
+  setText(part(docket, 'status'), session.deferred ? `${words.deferredNote} · ${status.label}` : status.label);
   setText(part(docket, 'time'), formatElapsed(session.statusSince));
   setText(part(docket, 'ticket'), session.ticket ?? '');
   setText(part(docket, 'repo'), [session.repoName, session.profile].filter(Boolean).join(' · '));
