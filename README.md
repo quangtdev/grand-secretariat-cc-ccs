@@ -100,3 +100,7 @@ Do not expose the port any other way.
 | [Design guidelines](docs/design-guidelines.md) | Design system summary ([DESIGN.md](DESIGN.md) is the source of truth) |
 | [Project roadmap](docs/project-roadmap.md) | Done, known gaps, next steps |
 | [`promo-video/`](promo-video/) | Kit that records the promo video with fake agents |
+
+## License
+
+[MIT](LICENSE) © 2026 quangtdev
